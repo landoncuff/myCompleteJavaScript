@@ -103,3 +103,123 @@ console.log(x, y);
 const averageAge = (ageLandon + ageKass) / 2;
 
 */
+
+
+/* 
+
+! String and temperal literals
+const firstName = 'Landon';
+const job = 'programmer';
+const birtYear = 1996;
+const year = 2022;
+
+const landon = "I'm " + firstName + ', a ' + (year - birtYear) + ' years old ' + job + '!';
+
+console.log(landon);
+
+//* using ES6 temperal literals - can assemble many points into one string
+? start with back tickts
+
+const landonNow = `I'm ${firstName}, a ${year - birtYear} years old ${job}!`;
+
+console.log(landonNow);
+
+? we can use backtickets for any regular Strings. You can use backtickets always
+
+//* Multi lines using ES6
+
+? none ES6 method
+console.log('String with \n\
+multiple \n\
+lines');
+
+? using ES6 temperal literals
+console.log(`String
+multiple
+lines`);
+
+*/
+
+
+/* 
+! if/else statements 
+
+const age = 12;
+? const isOldEnough = age >= 18;
+
+if(age >= 18){
+    console.log('Landon can start drving 🐱')
+}else{
+    const yearsLeft = 18 - age;
+    console.log(`Landon is too young. Waiting another ${yearsLeft} years`);
+}
+
+const brithYear = 1996;
+let century;
+
+if(brithYear <= 2000){
+    century = 20;
+}else{
+    century = 21;
+}
+
+*/
+
+
+/* 
+! Type conversion and coercion 
+
+//* Type conversion is when you change the type manually
+//* Type coercion is JavaScript converts for us
+
+//* Type concersion 
+const inputYear = '1996';
+// convert string to number
+const newInputYear = Number(inputYear);
+console.log(newInputYear + 18)
+
+? when you try to convert a non numberable value to a number you will get a NaN (Not a Number);
+console.log(Number('Landon'));
+
+//* Type Coercion 
+console.log('I am ' + 23 + ' years old');
+
+? the plus sign activates type coercion
+
+let n = '1' + 1; // value is 11
+
+
+n = n - 1; // subtracts the only number 1 
+
+console.log(n) // 10 is the output because the string 1 doesnt change
+
+*/
+
+/* Truty and Falsy */
+
+//*  5 falsy values: 0; ''; undefined; null; NaN
+//*  any value that will be come false converting into a boolean
+
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean('Landon'));
+console.log(Boolean({}));
+
+const money = 1;
+//? it is anumber and not a boolean but JavaScript will try and convert it if not
+//? 0 doesnt work because it is a falsy value
+if(money){
+    console.log("Don't spend it all ;)");
+}else{
+    console.log("You should get a job");
+
+}
+
+//* checking if a variable is defined or not
+let hight;
+//? undefined is a falsy value
+if(hight){
+    console.log('Height is defined');
+}else{
+    console.log('Height is not defined');
+}
