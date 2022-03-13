@@ -195,7 +195,8 @@ console.log(n) // 10 is the output because the string 1 doesnt change
 
 */
 
-/* Truty and Falsy */
+/* 
+!Truty and Falsy 
 
 //*  5 falsy values: 0; ''; undefined; null; NaN
 //*  any value that will be come false converting into a boolean
@@ -217,9 +218,117 @@ if(money){
 
 //* checking if a variable is defined or not
 let hight;
-//? undefined is a falsy value
+? undefined is a falsy value
 if(hight){
     console.log('Height is defined');
 }else{
     console.log('Height is not defined');
 }
+
+*/
+
+
+
+/* 
+!Equality operator: == VS. === 
+
+const age = 18;
+if(age === 18) console.log('You just become an adult');
+
+? prompting the user for their favorite number
+const favorite = Number((prompt("What's your favorite number?")));
+if(favorite ===  23){
+    console.log(favorite);
+}
+
+
+//* Else if
+
+
+
+
+//* Logical Operator
+
+const hasDriversLicence = true; // A
+const hasGoodVision = false; // B
+
+console.log(hadDriversLicence && hasGoodVision);
+console.log(hadDriversLicence || hasGoodVision);
+
+const shouldDrive = hasDriversLicence && hasGoodVision;
+
+if(shouldDrive){
+    console.log('Landon is able to drive');
+}else{
+    console.log('Landon cant drive');
+}
+
+const isTried = true // C
+console.log(hadDriversLicence || hasGoodVision || isTired);
+
+*/
+
+/*
+! Switch Statement 
+
+const day = 'monday';
+
+switch(day){
+    case 'monday':
+        console.log('Plan cource structure');
+        console.log('Go to coding meetup');
+    break;
+    case 'tuesday':
+        console.log('prepare theory videos');
+    break;
+    case 'wednesday':
+    case 'thursday':
+        console.log('code examples');
+    break;
+    case 'friday':
+        console.log('record videos');
+    break;
+    case 'saturday':
+    case 'sunday':
+        console.log('Enjoy the weekend');
+    break;
+    default:
+        console.log('Not a valid day');
+}
+
+
+if(day === 'monday'){
+    console.log('Plan cource structure');
+    console.log('Go to coding meetup');
+}else if(day === 'tuesday'){
+    console.log('prepare theory videos');
+}
+
+*/
+
+/* 
+
+!Statements and Expressions 
+
+//* Expression is a line of code that produces a value
+3 + 40
+1991
+
+//* you can not put a statement where an expression should be inputed.
+
+*/
+
+
+
+/* 
+! ternary operator 
+
+const age = 17;
+age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water');
+
+const drink = age >= 18 ? 'Wine' : 'Water';
+console.log(drink);
+
+console.log(`I like to drink ${drink}`);
+
+*/
