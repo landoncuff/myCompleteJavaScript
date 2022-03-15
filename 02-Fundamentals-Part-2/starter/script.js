@@ -396,3 +396,86 @@ console.log(landon.getSummary());
 // another test
 
 */
+
+
+/* 
+
+! For Loop:
+
+
+// console.log('Lifting weights rep 1');
+// console.log('Lifting weights rep 2');
+// console.log('Lifting weights rep 3');
+// console.log('Lifting weights rep 4');
+// console.log('Lifting weights rep 5');
+// console.log('Lifting weights rep 6');
+// console.log('Lifting weights rep 7');
+// console.log('Lifting weights rep 8');
+// console.log('Lifting weights rep 9');
+// console.log('Lifting weights rep 10');
+for(let rep = 1; rep <= 10; rep++){
+    console.log(`Lifting weights rep ${rep}`);
+}
+
+*/
+
+
+
+/* 
+
+! Loop through an array
+
+
+const landonArray = [
+    'Landon', 
+    'Cuff',
+    2022 - 1996, 
+    'Programmer', 
+    ['Robert', 'Kass', 'Landon']
+]
+
+? Creating a new empty array
+const types = [];
+
+? reading values from an array
+? adding values to the new empty array
+for(let i = 0; i < landonArray.length; i++) {
+    console.log(landonArray[i], typeof landonArray[i]);
+
+    ? filling the types array with the types of landonArray
+    ? types[i] = typeof landonArray[i];
+    ? basically doing this types[0] = 'string';
+
+    ? values to the array
+    types.push(typeof landonArray[i]);
+}
+
+console.log(types);
+
+const years = [1992, 2022, 2000, 1890];
+
+const ages = [];
+
+for(let i = 0; i < years.length; i++) {
+   ages.push(2022 - years[i]);
+}
+
+console.log(ages);
+
+
+//* continue and break statements:
+? continue is to exit and then move on to the next one
+for(let i = 0; i < landonArray.length; i++) {
+    ? will move skip the current interation and move onto the next
+    if(typeof landonArray[i] !== 'string') continue;
+    console.log(landonArray[i], typeof landonArray[i]);
+}
+
+? Break condition
+for(let i = 0; i < landonArray.length; i++) {
+    ? will move skip the current interation and move onto the next
+    if(typeof landonArray[i] === 'number') break;
+    console.log(landonArray[i], typeof landonArray[i]);
+}
+
+*/
