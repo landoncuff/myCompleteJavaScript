@@ -367,13 +367,29 @@ const landon = {
     job: 'Programmer',
     friends: ['Robert', 'Kass', 'Braydon'],
     hasDriversLicense: true,
-    calcAge: function(birthYear){
-        return 2022 - birthYear;
+    calcAge: function(){
+        //? creating a new variable inside the object
+        this.age = 2022 - this.birthYear;
+        return this.age;
+    },
+    //? this is the challenge
+    getSummary: function(){
+        return `${this.firstName} is a ${this.calcAge()} year old programmer, and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's license`;
     }
 }
 
-console.log(landon.calcAge(1996));
-console.log(landon['calcAge'](1996));
+// console.log(landon.calcAge());
+// console.log(landon['calcAge'](1996));
 
 //? Already have the birthYear in the object
-console.log(landon.calcAge(landon.birthYear));
+// console.log(landon.calcAge(landon.birthYear));
+
+//? calling the age from the object:
+//? have to call the function first
+console.log(landon.calcAge())
+console.log(landon.age);
+
+//* Challenge:
+//* Landon is a 46 years old programmer, and he has *a or no * driver's license
+
+console.log(landon.getSummary());
