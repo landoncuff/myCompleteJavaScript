@@ -358,7 +358,7 @@ console.log(`${landon.firstName} has ${landon.friends.length} friends, and his b
 
 ! Object Methods:
 
-*/
+
 
 const landon = {
     firstName: 'Landon',
@@ -368,11 +368,11 @@ const landon = {
     friends: ['Robert', 'Kass', 'Braydon'],
     hasDriversLicense: true,
     calcAge: function(){
-        //? creating a new variable inside the object
+        ? creating a new variable inside the object
         this.age = 2022 - this.birthYear;
         return this.age;
     },
-    //? this is the challenge
+    ? this is the challenge
     getSummary: function(){
         return `${this.firstName} is a ${this.calcAge()} year old programmer, and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's license`;
     }
@@ -381,11 +381,11 @@ const landon = {
 // console.log(landon.calcAge());
 // console.log(landon['calcAge'](1996));
 
-//? Already have the birthYear in the object
+? Already have the birthYear in the object
 // console.log(landon.calcAge(landon.birthYear));
 
-//? calling the age from the object:
-//? have to call the function first
+? calling the age from the object:
+? have to call the function first
 console.log(landon.calcAge())
 console.log(landon.age);
 
@@ -394,3 +394,5 @@ console.log(landon.age);
 
 console.log(landon.getSummary());
 // another test
+
+*/
