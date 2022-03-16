@@ -479,3 +479,78 @@ for(let i = 0; i < landonArray.length; i++) {
 }
 
 */
+
+
+
+
+
+/* 
+
+! Looping backwards and loops in loops
+
+
+const landonArray = [
+    'Landon', 
+    'Cuff',
+    2022 - 1996, 
+    'Programmer', 
+    ['Robert', 'Kass', 'Landon']
+]
+
+// 0, 1, ...., 4
+// 4, 3, ...., 0
+
+? Looping backwards through the array 
+? using - 1 to make sure it is 0 base
+for(let i = landonArray.length - 1; i >= 0; i--) {
+    console.log(i, landonArray[i]);
+}
+
+//* Loop inside a loop:
+
+for(let exercise = 1; exercise < 4; exercise++){
+    console.log(`------- Starting exercise ${exercise}`);
+
+    for(let rep = 1; rep < 6; rep++){
+        console.log(`Lifting weight repetition ${rep}`);
+    }
+}
+*/
+
+
+
+
+
+/* 
+
+! While Loop:
+
+
+for(let rep = 1; rep <= 10; rep++){
+    console.log(`Lifting weights rep ${rep}`);
+}
+
+? same code but with while loop:
+let rep = 1;
+while (rep <= 10){
+    console.log(`WHILE: Lifting weights rep ${rep}`);
+
+    rep++;
+}
+
+
+? using a while loop that does not depend on a counter
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while(dice !== 6){
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if(dice === 6){
+        console.log('Dice is about to end');
+    }
+}
+*/
+
+
+
+
