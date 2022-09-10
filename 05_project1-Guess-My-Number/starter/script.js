@@ -51,11 +51,12 @@ const secretNumber = Math.trunc(Math.random()*20)+1;
 //? Setting a new variable to keep track of the users score
 //? Using a let because we will be changing the value
 let score = 20;
+let highscore = 0;
 
 //? displaying the random number
 // document.querySelector('.number').textContent = secretNumber;
 
-function setScore(text, score) {
+const setScore = function (text, score) {
   if(score > 1){
     document.querySelector('.message').textContent = text;
     //? Decreasing the score
@@ -65,11 +66,10 @@ function setScore(text, score) {
     document.querySelector('.message').textContent = 'You lost the game';
     document.querySelector('.score').textContent = 0;
   }
-
   return score;
 }
 
-function querySelector(className, text){
+const myQuerySelector = function (className, text){
   document.querySelector(className).textContent = text;
 }
 
@@ -78,38 +78,21 @@ document.querySelector('.check').addEventListener('click', function() {
   const guess = Number(document.querySelector('.guess').value);
 
   if(!guess) {
-    // document.querySelector('.message').textContent = 'No Number';
-    querySelector('.message', 'No Number!!');
+    myQuerySelector('.message', 'No Number!!');
   }else if(guess === secretNumber){
-    document.querySelector('.message').textContent = 'Correct Number';
-    document.querySelector('.number').textContent = secretNumber;
-
+    myQuerySelector('.message','Correct Number');
+    myQuerySelector('.number', secretNumber);
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
     //? Setting the highscore to the final score
-    document.querySelector('.highscore').textContent = score;
+    if(score > highscore){
+      highscore = score;
+      myQuerySelector('.highscore', highscore);
+    }
   }else if(guess > secretNumber){
-    if(score > 1){
-      document.querySelector('.message').textContent = 'Too High!';
-      //? Decreasing the score
-      score--;
-      document.querySelector('.score').textContent = score;
-    }else{
-      document.querySelector('.message').textContent = 'You lost the game';
-      document.querySelector('.score').textContent = 0;
-    }
-    // score = setScore('Too High', score);
+    score = setScore('Too High', score);
   }else if(guess < secretNumber){
-    if(score > 1){
-      document.querySelector('.message').textContent = 'Too Low!';
-      //? Decreasing the score
-      score--;
-      document.querySelector('.score').textContent = score;
-    }else{
-      document.querySelector('.message').textContent = 'You lost the game 🥶';
-      document.querySelector('.score').textContent = 0;
-    }
-    // score = setScore('Too Low', score);
+    score = setScore('Too Low', score);
   }
 });
 
@@ -117,14 +100,11 @@ document.querySelector('.again').addEventListener('click', function(){
   score = 20;
   const secretNumber = Math.trunc(Math.random()*20)+1;
 
-  document.querySelector('.message').textContent = "Start Guessing...";
-  document.querySelector('.score').textContent = score;
-  document.querySelector('.number').textContent = '?';
+  myQuerySelector('.message',  "Start Guessing...");
+  myQuerySelector('.score', score);
+  myQuerySelector('.number', '?');
   //? input field and it is always a string
   document.querySelector('.guess').value = '';
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
-
-
-
 });
