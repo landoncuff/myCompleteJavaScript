@@ -1,6 +1,6 @@
 'use strict';
 /* 
-todo: scopeing
+TODO: scopeing
 ? Global scope
 ? Creating own execution case
 function calcAge(birthYear){
@@ -42,7 +42,7 @@ calcAge(1991);
 */
 
 /* 
-todo: Hoisting and TDZ
+TODO: Hoisting and TDZ
 
 
 ? calling variables before they are declared (hoisting)
@@ -98,7 +98,7 @@ const z = 12;
 
 
 /* 
-    todo: this keyword 
+    TODO: this keyword 
 
 ? Displays the window object which is the this in the global scope
 console.log(this);
@@ -155,7 +155,7 @@ f();
 */
 
 /*
-todo: Regular functions vs. Arrow functions 
+TODO: Regular functions vs. Arrow functions 
 
 
 ! will add firstName to the window object (DONT USE VAR)
@@ -233,3 +233,75 @@ var addArrow = (a, b) => {
 }
 addArrow(2,5)
 */
+
+/* 
+TODO: Primitives vs. Objects
+
+
+let age = 30;
+let oldAge = age;
+age = 31;
+console.log(age); // 31
+console.log(oldAge); // 30
+
+const me = {
+    name: 'Landon',
+    age: 30
+};
+
+? Copying the me object 
+const friend = me;
+? Will change age in the me object as well
+friend.age = 27;
+
+console.log(friend); // age: 27
+console.log(me); // age: 27
+
+*/
+
+//? Primitive types
+//? points to the same address on the call stack but then creates a new address when we change "lastName" variable
+let lastName = 'Landon';
+let oldLastName = lastName;
+lastName = 'Cuff';
+console.log(lastName, oldLastName);
+
+//? Object types
+//? Points to the same address in the call stack which then points to the address created in the heap for the object
+const lebron = {
+    firstName: 'Robert',
+    lastName: 'Cuff',
+    age: 27
+}
+//? Points to the same address in the call stakc and the heap
+const curray = lebron;
+//? Will change the lastName in the lebron object because we are only changing the value in the heap. Both objects still point to the same address
+//? the heap has nothing to do with const
+curray.lastName = 'Davis';
+console.log(curray, lebron);
+
+//? Copying the object without chaning the value 
+const lebron2 = {
+    firstName: 'Robert',
+    lastName: 'Cuff',
+    age: 27,
+    family: ['Kilee', 'Braydon', 'Shaylee']
+}
+
+//? object.assign which will merge two objects and then return a new object
+//? Copying the lebron2 object into a new object called kass
+//! Will only copy the object on the first level. Wont work if we have an object inside an object. We need a deep copy
+const kass = Object.assign({}, lebron2);
+kass.lastName = 'Dibb';
+kass.firstName = 'Kassidy';
+//! Will change both objects... Dont want that
+//! The family key is a deep level object and can not be copied using Object.assign()
+kass.family.push('Mary');
+kass.family.push('John');
+// kass.age = 23;
+console.log(kass, lebron2);
+
+
+
+
+
