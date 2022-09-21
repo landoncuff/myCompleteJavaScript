@@ -16,6 +16,15 @@ const restaurant = {
     //? This will point to the given scope
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  //? Destructuring right away with parameters
+  //? Those are all values from the object being passed in
+  //? Also setting default values if nothing is passed in
+  orderDelivery: function({starterIndex = 1, mainIndex = 0, time = '5:00', address = 'No Address Found'}){
+    console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time} `);
+  },
+  orderPasta: function(ing1, ing2, ing3){
+    console.log(`Here is your pasta with ${ing1} and ${ing2} and ${ing3}`);
+  },
 
   openingHours: {
     thu: {
@@ -100,4 +109,95 @@ const [p, q, r] = [8,9];
 const [w=1, m=1, n=1] = [8,9];
 console.log(w, m, n);
 */
+
+/* 
+TODO: Destructuring Objects
+
+? In order to destructure an object we use the {} braces
+* Doesnt matter what order you pull the information from the object. You just have to name it correctly 
+const {name, openingHours, categories} = restaurant;
+// console.log(name, openingHours, categories);
+
+* naming variables different from the properity names
+const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
+// console.log(restaurantName, hours, tags);
+
+* Default values
+? Setting menu to an EMPTY variable 
+? getting the starterMenu from the object, naming variable "starters" and setting the default to be EMPTY if no value
+const {menu = [], starterMenu: starters = []} = restaurant;
+
+* Mutating Variables (changing the value between two different values)
+let a = 111;
+let b = 999;
+const obj = {a: 23, b: 7, c: 14};
+
+? We want a to become 23 and b to become 7
+! In order to destructure already created variables you will need to put the desturtcuring call inside parathensis ()
+({a, b} = obj);
+// console.log(a,b);
+
+* Nested objects 
+? Creating two variables for open and close
+? getting information inside restaurant => openingHours => fri (nested inside 3 objects)
+! Pulling the information from fri inside the opeingHours and then pulling open and close from the fri object
+const {fri: {open: o, close: c}} = openingHours;
+console.log(o, c);
+
+* Function that is passed with an object and embitalty destructuring resturant object
+? Calling the new method inside the restaurant object and passing in a new object
+restaurant.orderDelivery({
+  time: '5:30',
+  address: 'Random Address',
+  mainIndex: 2,
+  starterIndex: 2
+});
+? Calling the defaults in the method
+restaurant.orderDelivery({});
+
+*/
+
+/* 
+TODO: Spread Operator (...)
+*/
+//* Adding new elements to the array using spread operator
+const arr = [7,8,9,10,11];
+//? Old way to add new elements to the array
+const badWay = [1,2, arr[0], arr[1], arr[2], arr[3], arr[4]];
+//? Will take out all the elements in the array and put them into the new array
+const goodWay = [1,2, ...arr];
+// console.log(goodWay);
+// console.log(badWay);
+
+
+//* Creating a new item in the mainMenu array in the restaurant object
+//? Building a new array
+const newMenu = [...restaurant.mainMenu, 'Gnocci', 'Landon'];
+// console.log(newMenu);
+// restaurant.mainMenu = newMenu;
+
+//* Creating shallow copies of an array
+const mainMenuCopy = [...restaurant.mainMenu];
+
+//* Merging 2 arrays together
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// console.log(menu);
+
+//* Spread Operator on a string 
+const str = 'Landon';
+const letters = [...str, ' ', 's.'];
+// console.log(letters);
+
+//* Creating a new method that will order just pasta with three ingredients
+//? Creating a prompt window for the user to input and capturing that input in the ingredients variable 
+//? Escaping the s on let's 
+// const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'), prompt('Let\'s make pasta! Ingredient 2?'), prompt('Let\'s make pasta! Ingredient 3?')];
+// restaurant.orderPasta(...ingredients);
+
+//* Objects 
+//? New restaurant object
+//? creating a copy of the resturant object
+const restaurantCopy = {...restaurant};
+const newRestaurant = {foundingYear: '2015',...restaurantCopy, founder: 'Landon Cuff'};
+console.log(newRestaurant);
 
