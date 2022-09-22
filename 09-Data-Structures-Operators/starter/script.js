@@ -25,6 +25,10 @@ const restaurant = {
   orderPasta: function(ing1, ing2, ing3){
     console.log(`Here is your pasta with ${ing1} and ${ing2} and ${ing3}`);
   },
+  orderPizza: function(mainIngredient, ...otherIngredients){
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 
   openingHours: {
     thu: {
@@ -159,19 +163,19 @@ restaurant.orderDelivery({});
 
 /* 
 TODO: Spread Operator (...)
-*/
-//* Adding new elements to the array using spread operator
+
+* Adding new elements to the array using spread operator
 const arr = [7,8,9,10,11];
-//? Old way to add new elements to the array
+? Old way to add new elements to the array
 const badWay = [1,2, arr[0], arr[1], arr[2], arr[3], arr[4]];
-//? Will take out all the elements in the array and put them into the new array
+? Will take out all the elements in the array and put them into the new array
 const goodWay = [1,2, ...arr];
 // console.log(goodWay);
 // console.log(badWay);
 
 
-//* Creating a new item in the mainMenu array in the restaurant object
-//? Building a new array
+* Creating a new item in the mainMenu array in the restaurant object
+? Building a new array
 const newMenu = [...restaurant.mainMenu, 'Gnocci', 'Landon'];
 // console.log(newMenu);
 // restaurant.mainMenu = newMenu;
@@ -188,16 +192,66 @@ const str = 'Landon';
 const letters = [...str, ' ', 's.'];
 // console.log(letters);
 
-//* Creating a new method that will order just pasta with three ingredients
-//? Creating a prompt window for the user to input and capturing that input in the ingredients variable 
-//? Escaping the s on let's 
-// const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'), prompt('Let\'s make pasta! Ingredient 2?'), prompt('Let\'s make pasta! Ingredient 3?')];
-// restaurant.orderPasta(...ingredients);
+* Creating a new method that will order just pasta with three ingredients
+? Creating a prompt window for the user to input and capturing that input in the ingredients variable 
+? Escaping the s on let's 
+const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'), prompt('Let\'s make pasta! Ingredient 2?'), prompt('Let\'s make pasta! Ingredient 3?')];
+restaurant.orderPasta(...ingredients);
 
-//* Objects 
-//? New restaurant object
-//? creating a copy of the resturant object
+* Objects 
+? New restaurant object
+? creating a copy of the resturant object
 const restaurantCopy = {...restaurant};
 const newRestaurant = {foundingYear: '2015',...restaurantCopy, founder: 'Landon Cuff'};
 console.log(newRestaurant);
+*/
 
+/*
+TODO: Rest Pattern & Parameters 
+
+
+? Rest pattern looks just like the spread operator but does the exact opposite. It will pack elements into an array
+! Sread operator because it is on RIGHT side of the =
+const arr = [1,2, ...[3,4]];
+
+! Rest pattern because the ... are on the LEFT side of the =
+? We are creating two new variables (a & b) and setting them equal to the frist two indexes of the array. We are then setting the rest of the elements in the array to a variable called 'others'
+const [a,b,...others] = [1,2,3,4,5];
+console.log(a,b,others);
+
+* Another Rest Pattern example in array destructuring 
+? Using spread operator to get all of the elements in the mainMenu and startMenu array. We are then capturing the values of pizza and risotto by skipping the middle menu item
+? We are then using the rest pattern to input the rest of the menu and starter menu items into a new variable called otherFood
+! Will only caputer values after the last variable. In example below otherFood will not have Pasta because it was before risotto (NOT included skipped elements)
+const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, risotto, otherFood);
+
+* Another Rest Pattern example in Objects destructuring
+? Only gettting saturday hours and the rest should go into a different variable called otherWeekdays
+const {sat, ...otherWeekdays} = restaurant.openingHours;
+console.log(sat, otherWeekdays);
+
+* Rest Pattern for Functions 
+? Using Rest Parameters to get an unlimited number of parameters
+? We are compressing all the elements into an array
+const add = function(...numbers){
+  let sum = 0;
+  for(let i = 0; i < numbers.length; i++){
+    sum += numbers[i];
+  }
+  console.log(sum);
+}
+add(2,3);
+add(5,7,3,2);
+add(8,2,5,3,2,1,4);
+
+? Creating an array to pass in using the spread operator to the function add
+const x = [23,5,7];
+? breaking out the elements in the array and passing them to the function add which then will put them back into an array 
+! Same as writing add(23,5,7)
+add(...x);
+
+* Creating a new metod called oderPizza and using rest parameters
+? Will show the first index and then store the rest of the elements into an array called otherIngredients
+restaurant.orderPizza('mushroom', 'onion', 'olive', 'spinach');
+*/
