@@ -255,3 +255,49 @@ add(...x);
 ? Will show the first index and then store the rest of the elements into an array called otherIngredients
 restaurant.orderPizza('mushroom', 'onion', 'olive', 'spinach');
 */
+
+
+/*
+TODO: Short circuiting && (and) || (or):
+
+
+? Three properties of logical operators
+! They can use ANY data type and return ANY data type and can do short-circuiting
+console.log(3 || 'Landon'); //! Will return 3 because it is true value. Doesnt even read Landon
+console.log("" || 'Landon'); //! Will return Landon because '' is a falsy value
+console.log(true || 0); //! Will return true because 0 is falsy value
+console.log(undefined || null); //! Will return null because underfined is a falsy value and null is also falsy 
+
+* using short circuit using the or operator
+? Will return 10 because numGusts does not exist
+const guest1 = restaurant.numGusts ? restaurant.numGusts : 10;
+? Works because restaurant numGusts doesnt exits so it using the or operator to define it
+! Wont work if restaurant numguests exits and is equal to 0 because that is not what we want
+const guest2 = restaurant.numGusts || 10;
+// console.log(guest2);
+
+
+
+* Using short circuit using the and operator
+? The AND operator is only true if all the conditions are true and will break at the false value
+? Preactical example:
+if(restaurant.orderPizza){
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+? Using short circuit
+? If it doesnt exits then it wont do anything. If it does, will order pizza with pepperoni
+! will return a pizza with pepperoni
+restaurant.orderPizza && restaurant.orderPizza('pepperoni');
+! Wont return anything because orderMyPizza doesnt exist
+restaurant.orderMyPizza && restaurant.orderPizza('pepperoni');
+*/
+
+/*
+TODO: Nullish Coalescing Operator (??)
+*/
+restaurant.numGusts = 0;
+const guests = restaurant.numGusts || 10;
+console.log(guests);
+//? is the same this as || but only looks at nullish values (Null and Undefined) (NOT 0 or '')
+const guestCorrect = restaurant.numGusts ?? 10;
+console.log(guestCorrect);
