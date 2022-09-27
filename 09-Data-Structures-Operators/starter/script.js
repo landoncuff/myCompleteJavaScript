@@ -294,10 +294,49 @@ restaurant.orderMyPizza && restaurant.orderPizza('pepperoni');
 
 /*
 TODO: Nullish Coalescing Operator (??)
-*/
+
 restaurant.numGusts = 0;
 const guests = restaurant.numGusts || 10;
 console.log(guests);
-//? is the same this as || but only looks at nullish values (Null and Undefined) (NOT 0 or '')
+? is the same this as || but only looks at nullish values (Null and Undefined) (NOT 0 or '')
 const guestCorrect = restaurant.numGusts ?? 10;
 console.log(guestCorrect);
+*/
+
+
+/* 
+TODO: Logical Assignment Operators
+
+
+const rest1 ={
+  name: 'Landon',
+  numGusts: 20,
+}
+
+const rest2 ={
+  name: 'La Pizza',
+  owner: 'Kassidy Cuff',
+}
+
+* Set default number of guest for those that dont have that property
+? if rest2.numGusts exists then add rest2.numGusts or if it doesnt, it will create and add 10
+rest2.numGusts = rest2.numGusts || 10;
+console.log(rest2.numGusts);
+
+* The OR logical assignment operator
+? Same code as above
+rest2.numGusts ||= 10;
+? using the same assignment operator but fixing to avoid if the value is 0 by using the nullish operator
+rest2.numGusts ??= 10;
+
+* The AND logical assignment operator
+? Using short circuiting assignment operator
+rest2.owner = rest2.owner && '<ANONYMOUS>';
+! Will return undefined because the first condition is not true
+rest1.owner = rest1.owner && '<ANONYMOUS>';
+
+? Using logical assignment operator
+rest2.owner &&= '<ANONYMOUS>';
+! doest not return undefined because it did not exist
+rest1.owner &&= '<ANONYMOUS>';
+*/
