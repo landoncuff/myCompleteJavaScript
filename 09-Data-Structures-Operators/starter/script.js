@@ -451,3 +451,33 @@ printGoals(...allPlayers);
 team1 < team2 && console.log('Team 1 is more likley to wiin');
 team1 > team2 && console.log('Team 2 is more likley to wiin');
 */
+
+/*
+TODO: Looping Arrays: The for-of loop 
+
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+? Regular for loop
+for (let i = 0; i < menu.length; i++) {
+  console.log(menu[i]);
+}
+
+* for-of loop
+for(const item of menu) {
+  console.log(item);
+}
+// for(const data of menu) console.log(data);
+
+? Get current index of the for-of loop
+! Is a pain for this loop was created to just return all values
+for(const item of menu.entries()){
+  console.log(`${item[0] +1}: ${item[1]}`);
+}
+
+? We can destructure the array now
+? i is the index because the array is structured like [0, value] or [1, value]
+for(const [i, el] of menu.entries()){
+  console.log(`${i +1}: ${el}`);
+}
+*/
