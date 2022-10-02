@@ -543,4 +543,46 @@ const restaurant = {
   openingHours,
 };
 
-console.log(restaurant);
+// console.log(restaurant);
+
+/*
+TODO: Optional Chaining (.?)
+
+? Checking to see if openingHours exists and the hours for monday
+if(restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+
+* Optional Chaining
+? Changing the code above with optional Chaining
+! Only run the code if Monday exists. Will run the code after the ?. if the value exists
+console.log(restaurant.openingHours.mon?.open);
+! Only run the code if Opening hours and Monday exists. Will run the code after the ?. if the value exists
+console.log(restaurant.openingHours?.mon?.open);
+
+* Looping through the array and writing the console the days they are open
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for(const day of days){
+  ? Have to pass in the day as the key 
+  ! Setting the default value after the ?. and ?? (?? is the || or statement but includes 0)
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day} we open at ${open}`);
+}
+
+* Optional Chaining on Methods 
+? Checking to see if the method exists before calling it 
+console.log(restaurant.order?.(0,1) ?? 'Method not found'); // ? Displays method becuase it does exist
+console.log(restaurant.orderRisotto?.(0,1) ?? 'Method not found'); // ? Displays method not found
+
+
+* Optional Chaining on Array
+? Checking to see if the array is empty 
+const user = [
+  {name: 'landon', email: 'landon@gmail'}
+]
+? If the array exists then return the name otherwise return default value
+console.log(user[0]?.name ?? 'User Array empty');
+*/
+
+/*
+TODO: Looping Objects: Object Keys, Values, and Entries  
+*/
