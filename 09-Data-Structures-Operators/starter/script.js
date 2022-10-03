@@ -585,4 +585,26 @@ console.log(user[0]?.name ?? 'User Array empty');
 
 /*
 TODO: Looping Objects: Object Keys, Values, and Entries  
+
+
+* Looping through properties names (keys)
+const properties = Object.keys(openingHours);
+let openStr = `We are open ${properties.length} days: `;
+for(const day of properties){
+? Adding more to the string
+  openStr += `${day}, `;
+}
+
+* Looping through values of an object
+for(const days of Object.values(openingHours)){
+  console.log(days);
+}
+
+* Looping through both keys and values
+const keyValue = Object.entries(openingHours);
+? Using destructuring to get the values from the object (Using object destructuring)
+! Getting the key (fri, sat) and then getting the values inside that object using the {} and their property name
+for(const [key, {open, close}] of keyValue){
+  console.log(`On the ${key} we open at ${open} and ${close}`);
+}
 */
