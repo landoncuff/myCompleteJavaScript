@@ -719,3 +719,44 @@ for (const player of game.scored) {
 }
 console.log(scorers);
 */
+
+/*
+TODO: Sets:
+*/
+
+//? Is a collection of unique values and can never have any duplicates
+
+const orderSet = new Set([
+  'pasta', 
+  'pizza', 
+  'pizza', 
+  'cheese', 
+  'pizza', 
+  'pasta'
+]);
+//? checking the size of the set (returns 3 because sets dont hold duplicates)
+console.log(orderSet.size);
+//? cehcking to see if a value is inside the set
+console.log(orderSet.has('pizza'));
+//? Adding a new value to the set
+orderSet.add('bread');
+//? Delete value from the set
+orderSet.delete('pizza');
+//? Deleting ALL values from sets
+// orderSet.clear();
+
+//? You can loop through sets 
+//* Looping through the set
+for(const order of orderSet) console.log(order);
+
+//? Main purpose of Sets is to remove duplicates from Arrays
+//* Real Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Waiter', 'Chef'];
+//? What different positions do we have at the restaurant?
+//! Turning a Set back into an array (All iterables are able to use the spread operator)
+const positions1 = [...new Set(staff)];
+console.log(positions1);
+//! Another way
+const positions = new Set(staff);
+const RestaurantStaff = [...positions];
+console.log(RestaurantStaff);
