@@ -760,3 +760,56 @@ const positions = new Set(staff);
 const RestaurantStaff = [...positions];
 console.log(RestaurantStaff);
 */
+
+/*
+TODO: Map Fundamentals:
+
+
+? Data is stored in key value pairs
+? Like objects but the keys in maps can be any data type (String, numbers, arrays, or objects)
+? A map is a data structure that we can map values to keys
+
+* Creating a new map and Setting values
+? Easiest way to create a map is just to delcare it and not pass anything in
+const rest = new Map();
+rest.set('name', 'Landons Rest');
+console.log(rest.set(1, 'London England'));
+? Chaining the sets because set returns the map
+rest
+.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+.set('open', 11)
+.set('close', 23)
+.set(true, 'We are open')
+.set(false, 'We are closed');
+
+* Getting values from the Map
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+* Example of using Maps
+const time = 21; // 9 PM
+? We can manipulate values within the get call
+? the logic will return true or false and so it will read the key true or false
+const weOpen = rest.get(time > rest.get('open') && time < rest.get('close'));
+console.log(weOpen);
+
+* Checking if value exists
+rest.has('categories');
+
+* Deleting values from Map
+rest.delete('name');
+
+* Using Arrays and Objects as Map Keys
+? Array
+const arr = [1,2];
+rest.set(arr, 'Test');
+? Getting value from key array
+rest.get(arr);
+
+* Setting the key as a value from the User 
+rest.set(document.querySelector('h1'), 'Heading'); //? Will return an object (h1 is my key and 'Heading' is my value)
+
+! You can't do this: not the same array in the Heap
+rest.set([2,3], 'testing');
+rest.get([2,3]);
+*/
