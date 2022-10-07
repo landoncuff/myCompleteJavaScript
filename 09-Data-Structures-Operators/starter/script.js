@@ -813,3 +813,56 @@ rest.set(document.querySelector('h1'), 'Heading'); //? Will return an object (h1
 rest.set([2,3], 'testing');
 rest.get([2,3]);
 */
+
+/* 
+TODO: Map Iteration
+
+
+* Creating a new Map that holds an Array that holds other arrays. The frist element inside the nested Array is the key and the other is the value
+const question = new Map([
+  ['question', 'what is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['Correct', 3],
+  [true, 'You got the correct answer'],
+  [false, 'Try again!']
+]);
+
+
+* Convert Object into Map
+? used when you have an object and need to create a Map
+const hoursMap = new Map(Object.entries(openingHours));
+
+* Map Iteration:
+? Printing question to the console
+? Sending to the console the question
+console.log(question.get('question'));
+! Using desctructing to get the key and value from the map
+for(const [key, value] of question){
+  ? Only print to the console if the value is a number
+  if(typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+
+? Getting the value from the user and making sure the value from the user is a number
+// const answer = Number(prompt('Your Answer'));
+console.log(answer);
+
+? Challenge, log to the console what the result is for the user
+! My Code
+if(answer === question.get('Correct')){
+  console.log(question.get(true));
+}else{
+  console.log(question.get(false));
+}
+
+! Teachers code
+? Will return true or false
+const userAnswer = question.get('Correct') === answer;
+console.log(question.get(userAnswer));
+
+
+* Converting a Map back into an array
+const newQuestion = [...question];
+console.log(newQuestion);
+*/
