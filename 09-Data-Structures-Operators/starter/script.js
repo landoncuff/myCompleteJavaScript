@@ -879,7 +879,7 @@ Let's continue with our football betting app! This time, we have a map with a lo
       [FIRST HALF] 17: ⚽️ GOAL
 
 GOOD LUCK 😀
-*/
+
 const gameEvents = new Map([
   [17, 'Goal'],
   [36, 'Substitution'],
@@ -894,37 +894,47 @@ const gameEvents = new Map([
   [92, 'Yellow Card'],
 ]);
 
-//! Step 1: 
-//? Getting the values of the Map using the value() method  and putting it into an array
+! Step 1: 
+? Getting the values of the Map using the value() method  and putting it into an array
 const events = [...new Set(gameEvents.values())];
 
-//! Step 2:
-//? Removing the yellow card from the Map using the delete method
-//? passing in the key of which value I want to delete
+! Step 2:
+? Removing the yellow card from the Map using the delete method
+? passing in the key of which value I want to delete
 console.log(gameEvents);
 gameEvents.delete(64)
 console.log(gameEvents);
 
 
-//! Step 3:
-//? Finding on average how often an event happneed during the game
+! Step 3:
+? Finding on average how often an event happneed during the game
 let min = 0;
 let total = 0;
 for(const [key, value] of gameEvents) {
   min += key;
   total++;
 }
-
-let totalMin = min / total;
-totalMin = 90 - totalMin;
+let totalMin = 90 / total;
 console.log(`An event happened, on average, every ${totalMin} minutes`);
 
 
-//! Step 4:
-//? Looping to determine if the event happened in the first half or the second half 
+! Step 4:
+? Looping to determine if the event happened in the first half or the second half 
 for(const [key, value] of gameEvents) {
-  const half = key <= 45 ? 'First Half' : 'Second Half';
-  console.log(`[${half}] ${key}: ${value}`);
+  const half = key <= 45 ? 'FIRST' : 'SECOND';
+  console.log(`[${half} HALF] ${key}: ${value}`);
 }
 
-//* Teachers Code:
+
+
+* Teachers Code for Challenge 3:
+
+! Step 3: 
+console.log(`An event happened, on average, every ${90 / gameEvents.size} minutes`);
+? Calculating the average time because the game was actually 92 minutes (BONUS)
+? Convurting all the keys into an array
+? Getting the last value (Using the pop method)
+const time = [...gameEvents.keys()].pop();
+console.log(`An event happened, on average, every ${time / gameEvents.size} minutes`);
+
+*/
