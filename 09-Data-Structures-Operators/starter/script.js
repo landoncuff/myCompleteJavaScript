@@ -938,3 +938,67 @@ const time = [...gameEvents.keys()].pop();
 console.log(`An event happened, on average, every ${time / gameEvents.size} minutes`);
 
 */
+
+/*
+TODO: Working with Strings -- Part 1
+
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+? Getting the character of a string at a particular index
+console.log(plane[0]); //? Will return 'A'
+console.log('B247'[0]); //? works the same as above
+
+? get the length of a string
+console.log(plane.length);
+console.log('B247'.length); //? works the same as above
+
+? Get the index of a character
+console.log(airline.indexOf('r')); //? Index 6
+console.log(plane.indexOf('A')); //? Index 0
+console.log(airline.lastIndexOf('r')); //? Index 10 because that is the last occurence of the character
+
+? Searching for a whole word (Is case sensitive)
+console.log(airline.search('Portugal'));
+
+? using the slice method to get part of the string
+! The first parameter is the begin.. so which index to start at (Removes everything until the index)
+console.log(airline.slice(4)); //? Removed 'TAP' from the string
+! Second parameter is the the end.. everything after the end will be removed
+console.log(airline.slice(4,7)); //? Removed 'TAP & Portugal' from the string... Returned 'Air'
+
+* Finding the index of a string we dont know about and slicing it from the string
+
+? Extracting the first word (Starting at index 0 and ending at the index of the first space)
+console.log(airline.slice(0, airline.indexOf(' '))); //? Returns 'TAP'
+? Extracting the last word
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); //? Will return Portugal 
+
+
+
+* Example:
+
+? function that recives an airplane seat and logs to the console if it is a middle seat or not
+
+const checkMiddleSeat = function(seat){
+  ? B and E are the middle seats
+  ! Taking the last letter from the string and checking if a B or E 
+  const s = seat.slice(-1);
+  if(s === 'B' || s === 'E'){
+    console.log('You got the middle seat ');
+  }else{
+    console.log('You got Lucky!!!');
+  }
+}
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+
+? Whenever we call a method on a string JavaScript automatically converts that string into an object
+? Basically creates:
+const stringLandon = new String('Landon is Cool'); //? typeof === object
+console.log(stringLandon);
+*/
