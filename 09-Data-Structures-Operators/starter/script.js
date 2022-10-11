@@ -880,3 +880,51 @@ Let's continue with our football betting app! This time, we have a map with a lo
 
 GOOD LUCK 😀
 */
+const gameEvents = new Map([
+  [17, 'Goal'],
+  [36, 'Substitution'],
+  [47, 'Goal'],
+  [61, 'Substitution'],
+  [64, 'Yellow Card'],
+  [69, 'Red Card'],
+  [70, 'Substitution'],
+  [72, 'Substitution'],
+  [76, 'Goal'],
+  [80, 'Goal'],
+  [92, 'Yellow Card'],
+]);
+
+//! Step 1: 
+//? Getting the values of the Map using the value() method  and putting it into an array
+const events = [...new Set(gameEvents.values())];
+
+//! Step 2:
+//? Removing the yellow card from the Map using the delete method
+//? passing in the key of which value I want to delete
+console.log(gameEvents);
+gameEvents.delete(64)
+console.log(gameEvents);
+
+
+//! Step 3:
+//? Finding on average how often an event happneed during the game
+let min = 0;
+let total = 0;
+for(const [key, value] of gameEvents) {
+  min += key;
+  total++;
+}
+
+let totalMin = min / total;
+totalMin = 90 - totalMin;
+console.log(`An event happened, on average, every ${totalMin} minutes`);
+
+
+//! Step 4:
+//? Looping to determine if the event happened in the first half or the second half 
+for(const [key, value] of gameEvents) {
+  const half = key <= 45 ? 'First Half' : 'Second Half';
+  console.log(`[${half}] ${key}: ${value}`);
+}
+
+//* Teachers Code:
