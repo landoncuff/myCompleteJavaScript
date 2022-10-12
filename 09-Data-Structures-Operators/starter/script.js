@@ -1002,3 +1002,127 @@ checkMiddleSeat('3E');
 const stringLandon = new String('Landon is Cool'); //? typeof === object
 console.log(stringLandon);
 */
+
+
+/*
+TODO: Working with Strings -- Part 2
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+* Changing the case of a string
+
+console.log(airline.toLocaleLowerCase());
+console.log(airline.toUpperCase());
+
+? fix the capitalization in name
+const passenger = 'lAnDon'; //? Should look like Landon 
+? put everything to lowercase 
+const passengerLower = passenger.toLowerCase();
+? Take the frist part of the string to change the case and then add the rest of the string
+! Taking the frist letter -- making it capital, then adding the rest of the string by slicing it and starting at the second letter
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+* Creating a function that will keep names consistent across
+
+const NameFix = function(name) {
+  const lowerName = name.toLowerCase();
+  const correctName = lowerName[0].toUpperCase() + lowerName.slice(1);
+  return correctName;
+}
+
+console.log(NameFix('rOBERT'));
+
+
+* Check users email: (Comparing emails)
+
+const email = 'landoncuff@gmail.com';
+const loginEmail = '  lANDonCuff@gmail.com';
+
+? Checking to see if emails are the same
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+
+? same Code as above
+const normalizedEmail = loginEmail.toLowerCase().trim();
+
+console.log(email === normalizedEmail ? 'Correct Email' : 'Invalid Email');
+
+* replacing parts of strings
+const priceGB = '288,97E';
+const priceUS = priceGB.replace('E', '$').replace(',', '.');
+
+
+* Two methods that return true or false
+? Includes 
+? Starts with
+console.log(plane.includes('A320'));
+console.log(plane.startsWith('A'));
+
+*/
+
+/*
+TODO: Working with Strings -- Part 3:
+
+
+? Most powerful string method (split)
+console.log('a+very+nice+Person'.split('+'));
+
+? Using destructuring to put names into variables 
+const [firstName, lastName] = 'Landon Cuff'.split(' ');
+
+const arr = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(arr);
+
+* Function to capitalize name
+
+const capitalizeName = function(name){
+  ? Creats an array of the names by spliting at the space and making sure it is all lowercase first 
+  const names = name.toLowerCase().split(' ');
+  const nameUpper = [];
+
+  ? Looping through each word and capitalizing the first character
+  for(const word of names){
+    // nameUpper.push(word[0].toUpperCase() + word.slice(1));
+    ? Teacher Code (Removing the first letter and replacing it with the capital letter)
+    nameUpper.push(word.replace(word[0], word[0].toUpperCase()))
+  }
+
+  ? Joining the array back together and turning back into a string
+  console.log(nameUpper.join(' '));
+}
+
+capitalizeName("Robert landon cuff");
+capitalizeName("daLLin GOLDEN dRIGgs");
+
+
+* Padding a string
+
+const message = 'Go to gate 23!';
+console.log(message.padStart(25));
+
+? Example (Credit Cards online)
+const maskCreditCard = function(number){
+  // const str = String(number);
+  const str = number + '';
+  ? Taking last four characters
+  const last = str.slice(-4);
+
+  ? Getting the full length of the string and replacing the numbers with *
+  return last.padStart(str.length, '*');
+
+}
+
+console.log(maskCreditCard(4332344553322344453)); //? Returns *************************4400
+console.log(maskCreditCard('4332344553322344453'));
+console.log(maskCreditCard('223454554'));
+
+
+* Repeat
+
+const message2 = 'Bad Weather... All Departues Delayed';
+
+? Bigger string that repeats the string above
+console.log(message2.repeat(5));
+*/
