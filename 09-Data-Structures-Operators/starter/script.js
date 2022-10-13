@@ -1126,3 +1126,85 @@ const message2 = 'Bad Weather... All Departues Delayed';
 ? Bigger string that repeats the string above
 console.log(message2.repeat(5));
 */
+
+
+/* 
+TODO: Challenge #4
+
+
+* Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+* The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+? THIS TEST DATA (pasted to textarea)
+underscore_case
+first_name
+Some_Variable 
+calculate_AGE
+delayed_departure
+
+? SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+* HINT 1: Remember which character defines a new line in the textarea 😉
+* HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+* HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+* HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+
+
+! will create a textarea and button on the HTML page
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+? Creating an event to listen from the DOM
+document.querySelector('button').addEventListener('click', function(){
+  ? Getting the users input in the textarea
+  const text = document.querySelector('textarea').value;
+  ? splitting the text from the user by a new line (enter) -- This will create a new array with all the values from the user
+  const arrValues = text.split('\n');
+
+  ? Looping the new array by using descturturing by adding the index as "i" and the values as "values"
+  for(const [i,value] of arrValues.entries()) {
+    ? taking each value -- setting it to lowercase -- trimming off the whitespace -- and splitting each value into a new array
+    const stringValue = value.toLowerCase().trim().split('_');
+
+    ? Destructuring to get the first string and the second string
+    const [firstString, secondString] = stringValue;
+
+    ? Combining the first and second string -- replacing the first value in the second string and replacing it with a capital letter
+    const output = `${firstString}${secondString.replace(secondString[0], secondString[0].toUpperCase())}`;
+
+    ? Sending to the console the new string and adding 20 padding space -- creating a check mark that will repeat the number of times of i
+    console.log(`${output.padEnd(20)}${'✅ '.repeat(i + 1)}`);
+  }
+});
+
+* Teachers code:
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});
+
+*/
