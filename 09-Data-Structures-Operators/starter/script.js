@@ -1,8 +1,8 @@
 'use strict';
 
 // Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+// const flights =
+  // '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 // Data needed for first part of the section
 /*
@@ -1207,4 +1207,31 @@ document.querySelector('button').addEventListener('click', function () {
   }
 });
 
+*/
+
+/* 
+TODO: More String Practice
+
+const flights = '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+? Dividing up the string into four different pieces
+console.log(flights.split('+')); //? returns an array split at the plus line
+
+? Creating a small function the get the airport code 
+const getCode = str => str.slice(0,3).toUpperCase();
+
+? Looping through the new split array
+for(const flight of flights.split('+')) {
+  ? splitting the new variable by the ; seperator (using destructuring)
+  const [type, from, to, time] = flight.split(';');
+
+  ! replaced the : with h on the time to get 11h25 instead of 11:25
+  ! Using "replaceAll" to repalce all instances of _ and adding a space instead
+  ! Using ‼️ when the fligth is delayed (Using the startWith method)
+  ! Taking the first three methods from the "from" and "to" string and then capitalizing them (Created a function above)
+  ! Adding padding start to the whole string 
+  const output = `${type.startsWith('_Delayed')?'‼️':''}${type.replaceAll('_', ' ')} from ${getCode(from)} to ${getCode(to)} (${time.replace(':', 'h')})`.padStart(44);
+
+  console.log(output);
+}
 */
