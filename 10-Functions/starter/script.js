@@ -45,9 +45,9 @@ const checkIn = function(flightNum, passenger){
     passenger.name = 'Mr. ' + passenger.name;
 
     if(passenger.passport === 346453637){
-        // alert('Checked In!');
+        alert('Checked In!');
     }else{
-        // alert('Wrong Passport');
+        alert('Wrong Passport');
     }
 }
 
@@ -71,4 +71,46 @@ newPassport(landon);
 checkIn(flight, landon);
 
 console.log(landon);
+*/
+
+
+/*
+TODO: First-Class and Higher-Order Functions
+*/
+
+/*
+TODO: Functions Accepting Callback Functions
+
+
+? Function to replace ALL the spaces in a word and putting it to lowerCase
+const oneWord = function(str){
+    return str.replaceAll(" ", "").toLowerCase();
+}
+
+console.log(oneWord('Landon Cuff'));
+
+const upperFirstWord = function(str){
+    ? Using destructuring and pulling out the first word of the string and then adding the rest of the string to "Other" Variable 
+    const [first, ...other] = str.split(' ');
+
+    ? adding the first word back with all the other words
+    return [first.toUpperCase(), ...other].join(' ');
+}
+
+? New function that will take in a string and a function
+* Higher-Order function (Takes in another function)
+const transformer = function(str, fn){
+    ? Declaring the function by passing in the str 
+    console.log(`Transformed string: ${fn(str)}`);
+
+    ? Functions can have methods and properties
+    console.log(`Transformed string: ${fn.name}`);
+}
+
+transformer('JavaScript is the best', upperFirstWord);
+transformer('JavaScript is the best', oneWord);
+
+
+? Differnt kind of Callback function
+['Landon', 'Dallin', 'Kilee'].forEach(upperFirstWord);
 */
