@@ -81,7 +81,6 @@ TODO: First-Class and Higher-Order Functions
 /*
 TODO: Functions Accepting Callback Functions
 
-
 ? Function to replace ALL the spaces in a word and putting it to lowerCase
 const oneWord = function(str){
     return str.replaceAll(" ", "").toLowerCase();
@@ -113,4 +112,89 @@ transformer('JavaScript is the best', oneWord);
 
 ? Differnt kind of Callback function
 ['Landon', 'Dallin', 'Kilee'].forEach(upperFirstWord);
+*/
+
+
+/*
+TODO: Functions Returning Functions
+
+
+const greet = function(greeting){
+    return function(name){
+        console.log(`${greeting} ${name}`);
+    }
+}
+
+* Challenge: Rewrite function above using arrow functions:
+const greetArr = (greeting) => { return (name) => console.log(`${greeting} ${name}`)};
+! Teachers way
+const greetArr2 = greeting => name => console.log(`${greeting} ${name}`);
+
+? greeterHey is now a function (it is the function above return statement)
+const greeterHey = greet('Hey');
+
+greeterHey('Landon'); //? Will return "Hey Landon"
+greeterHey('Dallin'); //? Will return "Hey Dallin"
+
+! You can also call the return statements function by doing:
+greet('Hello')('Landon'); //? Will return "Hello Landon"
+
+? Calling the arrow function
+greetArr('Hello')('Landon'); //? Will return "Hello Landon"
+*/
+
+
+/*
+TODO: Functions Returning Functions
+
+
+? New Object
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    book(flightNum, name){
+        ? using "this" keyword to get the airline and itata code
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+
+         ? Want to add each value to the bookings array to capture flights
+        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name})
+    },
+}
+
+lufthansa.book('239', 'Landon'); //? Returns Landon booked a seat on Lufthansa flight LH239`
+lufthansa.book('239', 'John Smith');
+console.log(lufthansa);
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+}
+
+! Creating a new function to hold the function inside lufthansa so we dont repeat code
+const book = lufthansa.book;
+
+! Does NOT work because "this" keyword is not defined in the function above... It's only in the method
+// book('23', 'Landon');
+
+? Using "call" method on the function to have the "this" keyword point to the correct object
+book.call(eurowings, 23, "Robert Cuff");
+console.log(eurowings);
+
+? Now using "call" method to call lufthansa as object
+book.call(lufthansa, 23, "Robert Cuff");
+console.log(lufthansa);
+
+
+const swiss = {
+    airline: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: []
+}
+
+book.call(swiss, 23, "Robert Cuff");
+
+const flightData = [583, 'Landon Cuff'];
+book.apply(swiss, flightData);
 */
