@@ -198,3 +198,75 @@ book.call(swiss, 23, "Robert Cuff");
 const flightData = [583, 'Landon Cuff'];
 book.apply(swiss, flightData);
 */
+
+/*
+TODO: Function Bind Method
+*/
+
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    book(flightNum, name){
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name})
+    },
+}
+
+lufthansa.book('239', 'Landon'); //? Returns Landon booked a seat on Lufthansa flight LH239`
+lufthansa.book('239', 'John Smith');
+console.log(lufthansa);
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+}
+
+const swiss = {
+    airline: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: []
+}
+
+const book = lufthansa.book;
+
+
+//* Using the bind method:
+//? Wont call the function book rather it will create a new function that will always use the eurowings object for "this" keyword
+const bookEW = book.bind(eurowings);
+//? Creating a booking function for every airline
+const bookLH = book.bind(swiss);
+bookEW(23, "Kass Dibb");
+
+//? we can set a default variable for a specific booking to set in stone the value
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Landon');
+
+
+//* Bind method with eventListers
+lufthansa.planes = 300;
+//? New method
+lufthansa.buyPlane = function(){
+    //? "this" is the button element not an actual value because the eventlistener is calling the function
+    console.log(this);
+    this.planes++;
+    console.log(this.planes);
+}
+
+//? We dont want to call the function in an event listener rather declare it so we use the bind method instead of the call method
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+
+//* Partial Application: (preset parameters)
+const addTax = (rate, value) => value + value * rate;
+
+console.log(addTax(0.1, 200));
+
+//? Presetting the rate so it will always be the same
+//! Declaring "null" because the first param is for "this" keyword and if there doesnt need to be, then you set it as null
+const addVAT = addTax.bind(null, 0.23);
+//? Same as the code above
+// addTax = value => value + value * 0.23;
+
+
