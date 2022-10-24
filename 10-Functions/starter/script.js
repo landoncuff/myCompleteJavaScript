@@ -315,5 +315,52 @@ Here are your tasks:
 ? BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
 GOOD LUCK 😀
-*/
 
+
+const poll = {
+    question: "What is your favorite programming language?",
+    options: ['0: JavaScript', '1: Pyton', '2: Rust', '3: C++'],
+    answers: new Array(4).fill(0),
+    ? Creating method:
+    registerNewAnswer(){
+        ! Creating a string dynamically to ask the question and give the options
+        ! We are joining all the options into one that is separated by a new line
+        const answer = Number(
+            prompt(
+            `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+            ))
+        console.log(answer);
+
+        ! Resetering the input to make sure it is not something crazy (like 52)
+        typeof answer === 'number' &&
+        answer < this.answers.length &&
+        this.answers[answer]++;
+  
+        this.displayResults();
+        this.displayResults('string');
+    },
+
+    ? Another method to make sure the user did not enter a string that they entered a number
+    ! Setting the default value to array
+    displayResults(type = 'array') {
+        if (type === 'array') {
+          console.log(this.answers);
+        } else if (type === 'string') {
+          // Poll results are 13, 2, 4, 1
+          console.log(`Poll results are ${this.answers.join(', ')}`);
+        }
+      },
+}
+
+document
+  .querySelector('.poll')
+  ! Have to add the bind method because "this" keyword will only point to the querySelector so we add poll to the bind method to make sure it reads the correct values
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+
+  ! Code for the bonus:
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+
+*/
