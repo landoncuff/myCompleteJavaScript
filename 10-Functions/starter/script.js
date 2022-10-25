@@ -364,3 +364,51 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 
 */
+
+/*
+TODO: Immediately Invoked Function Expressions (IIFE)
+
+
+? Sometimes in JavaScript you need a funciton that is called once and never again
+const runOnce = function(){
+    console.log('This will never be ran again');
+}
+
+runOnce();
+
+? Creating a funciton that is called immediately and not is not saved
+* The code beflow is IIFE expression. 
+! adding the () around the function allows us to create a function without need to declare a function name
+(function(){
+    console.log('This will never be ran again');
+})(); //! The (); at the end will call the function immediately
+! (function(){})();
+
+* Same code as above but using arrow function
+(() => console.log('This also wont be called again'))();
+*/
+
+
+/*
+TODO: Closures
+
+
+const secureBooking = function(){
+    let passengerCount = 0;
+    return function(){
+        passengerCount++;
+        console.log(passengerCount);
+    }
+}
+! One way to call the function
+secureBooking()();
+
+! Creating a new function that will return the inner function
+const booker = secureBooking();
+booker(); //? Becomes the inner function 
+booker();
+booker();
+booker();
+
+? How does the passengerCount keep incrmenting... when the secureBooking has already been called and created
+*/
