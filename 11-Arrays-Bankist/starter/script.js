@@ -74,3 +74,42 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+/*
+TODO: Simple Array Methods:
+
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// Slice Method:
+arr.slice(2) // Return ['c', 'd', 'e']
+arr.slice(2, 4) // Return ['c', 'd'] doesnt include end
+arr.slice(-2) // Return ['d', 'e'] gets the end of the array
+arr.slice(1, -2) // Return ['b', 'c'] starts at b and removes the last two elements
+let newArr1 = arr.slice() // Will return the actual arr
+let newArr = [...arr]; // Same code as above. Return the whole array into a new variable
+
+
+// Splice Method:
+arr.splice(2); // Will remove ['c', 'd', 'e'] from array
+arr.splice(-1); // Removing the last element from the array
+arr.splice(1, 2) // Will return ['a', 'd']
+
+
+const arr2 = ['a', 'b', 'c', 'd', 'e'];
+
+// Reverse Method:
+console.log(arr2.reverse());
+
+
+// Concat Method:
+const letters = arr.concat(arr2);
+const letters1 = [...arr, ...arr2]; // Same code as above
+console.log(letters)
+
+
+// Join Method:
+const newString = letters.join('-'); // Returns a-e-d-c-b-a
+console.log(newString);
+
+*/

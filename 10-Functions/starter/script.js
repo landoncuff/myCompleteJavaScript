@@ -11,7 +11,7 @@ const createBooking = function(flightNum, numPassengers = 1, price = 199){
     // numPassengers = numPassengers || 1;
     // price = price || 199;
 
-    ? Creating an object to hold values passed into the function 
+    ? Creating an object to hold values passed into the function
     ! we dont need to write it flightNum: flightNum in ES6
     const booking = {
         flightNum,
@@ -89,7 +89,7 @@ const oneWord = function(str){
 console.log(oneWord('Landon Cuff'));
 
 const upperFirstWord = function(str){
-    ? Using destructuring and pulling out the first word of the string and then adding the rest of the string to "Other" Variable 
+    ? Using destructuring and pulling out the first word of the string and then adding the rest of the string to "Other" Variable
     const [first, ...other] = str.split(' ');
 
     ? adding the first word back with all the other words
@@ -99,7 +99,7 @@ const upperFirstWord = function(str){
 ? New function that will take in a string and a function
 * Higher-Order function (Takes in another function)
 const transformer = function(str, fn){
-    ? Declaring the function by passing in the str 
+    ? Declaring the function by passing in the str
     console.log(`Transformed string: ${fn(str)}`);
 
     ? Functions can have methods and properties
@@ -280,7 +280,7 @@ const mainFun = function(rate){
 
 ? The rate will always be the same when creating a main function
 const secondFun = mainFun(.1);
-? You can change the value param to whatever you need 
+? You can change the value param to whatever you need
 console.log(secondFun(200));
 */
 
@@ -301,10 +301,10 @@ Here are your tasks:
         2: Rust
         3: C++
         (Write option number)
-  
+
   * 1.2. Based on the input number, update the answers array. For example, if the option is 3, increase the value AT POSITION 3 of the array by 1. Make sure to check if the input is a number and if the number makes sense (e.g answer 52 wouldn't make sense, right?)
 * 2. Call this method whenever the user clicks the "Answer poll" button.
-* 3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
+* 3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1".
 * 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
 
 ! HINT: Use many of the tools you learned about in this and the last section 😉
@@ -335,7 +335,7 @@ const poll = {
         typeof answer === 'number' &&
         answer < this.answers.length &&
         this.answers[answer]++;
-  
+
         this.displayResults();
         this.displayResults('string');
     },
@@ -377,7 +377,7 @@ const runOnce = function(){
 runOnce();
 
 ? Creating a funciton that is called immediately and not is not saved
-* The code beflow is IIFE expression. 
+* The code beflow is IIFE expression.
 ! adding the () around the function allows us to create a function without need to declare a function name
 (function(){
     console.log('This will never be ran again');
@@ -393,6 +393,7 @@ runOnce();
 TODO: Closures
 
 
+
 const secureBooking = function(){
     let passengerCount = 0;
     return function(){
@@ -400,15 +401,50 @@ const secureBooking = function(){
         console.log(passengerCount);
     }
 }
-! One way to call the function
+//! One way to call the function
 secureBooking()();
 
-! Creating a new function that will return the inner function
+//! Creating a new function that will return the inner function
 const booker = secureBooking();
-booker(); //? Becomes the inner function 
+booker(); //? Becomes the inner function
 booker();
 booker();
 booker();
 
-? How does the passengerCount keep incrmenting... when the secureBooking has already been called and created
-*/
+//? How does the passengerCount keep incrementing... when the secureBooking has already been called and created
+
+console.dir(booker);
+ */
+
+/*TODO: Challenge #2
+
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue,
+each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed,
+and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+
+
+// This is a function that is ran impartially when the page is processed.
+// The event listener to change the color is a closure and will remember the variable "header"
+(function () {
+    // Getting the h1 header and setting the color to red
+    const header = document.querySelector('h1'); header.style.color = 'red';
+    // getting the body of the page and adding an event listener to that body
+    document.querySelector('body').addEventListener('click', function (){
+        // Changing the color of the text to blue when the user clicks on the body of the page
+        header.style.color = 'blue';
+    })
+})();
+ */
+
+
+
+
+
+
+
