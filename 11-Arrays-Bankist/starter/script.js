@@ -71,7 +71,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -113,3 +113,86 @@ const newString = letters.join('-'); // Returns a-e-d-c-b-a
 console.log(newString);
 
 */
+
+
+/*
+TODO: AT method:
+
+
+const arr = [23, 11, 64];
+
+// pulling the first item from the array:
+let firstItem = arr[0];
+
+// using AT method
+let firstItemAT = arr.at(0);
+
+console.log(firstItem);
+console.log(firstItemAT);
+
+// getting the last element from the array (dont know the length of the array)
+let lastEl = arr[arr.length - 1];
+
+// using AT method to get last value
+let lastElAT = arr.at(-1);
+
+console.log(lastEl);
+console.log(lastElAT);
+ */
+
+
+/*
+TODO: Looping Arrays: forEach
+
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Using a forOf loop
+for(const movement of movements){
+  if(movement > 0){
+    console.log(`You deposited $${movement}`);
+  }else{
+    // using Math method to get absolute value of movement (remove - )
+    console.log(`You withdrew $${Math.abs(movement)}`);
+  }
+}
+
+console.log("------- FOREACH ------");
+
+movements.forEach(function(movement){
+  if(movement > 0){
+    console.log(`You deposited $${movement}`);
+  }else{
+    // using Math method to get absolute value of movement (remove - )
+    console.log(`You withdrew $${Math.abs(movement)}`);
+  }
+});
+
+console.log("---- Array Values ----")
+
+// Separating values into array
+
+// forOf
+for(const [i, values] of movements.entries()){
+  if(values > 0){
+    console.log(`You deposited $${values} at index: ${i}`);
+  }else{
+    console.log(`You withdrew $${Math.abs(values)} at index: ${i}`);
+  }
+}
+
+// forEach
+movements.forEach(function(mov, i, arr){
+  console.log(mov);
+  console.log(i);
+  console.log(arr);
+  if(mov > 0){
+    console.log(`You deposited $${mov} at index: ${i}`);
+  }else{
+    console.log(`You withdrew $${Math.abs(mov)} at index: ${i}`);
+  }
+});
+ */
+
+
+
