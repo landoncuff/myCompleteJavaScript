@@ -65,11 +65,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -193,6 +193,39 @@ movements.forEach(function(mov, i, arr){
   }
 });
  */
+
+
+/*
+TODO: forEach with Maps and Sets:
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+// forEach for Maps:
+// first param val, second param key, third param map
+currencies.forEach(function (val, key, map){
+  console.log(`${key}: ${val}`);
+});
+
+
+// forEach for Sets:
+const currenciesUnique = new Set([
+  'USD', 'EUR', 'GBP', 'USD', 'EUR'
+]);
+
+currenciesUnique.forEach(function (val, val2, set){
+  console.log(`${val} and ${val2}`);
+});
+
+// _ is used for throw away params
+currenciesUnique.forEach(function (val, _, set){
+  console.log(`${val} and ${val2}`);
+});
+ */
+
 
 
 
