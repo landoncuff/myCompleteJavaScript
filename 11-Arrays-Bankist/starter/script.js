@@ -110,7 +110,7 @@ displayMovements(account1.movements);
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -290,14 +290,15 @@ TEST DATA 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
 TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
- */
+
 
 const checkDogs = function (dogsJulia, dogsKate){
   // first and LAST two dogs are cats (STEP 1)
   const juliasNewDogs = dogsJulia.slice(1, -2);
 
   // New Array with all dogs (STEP 2)
-  const allDogs = [...juliasNewDogs, ...dogsKate];
+  const allDogs = juliasNewDogs.concat(dogsKate);
+  const allDogsExample = [...juliasNewDogs, ...dogsKate];
 
   // Log either if the dog is an adult or puppy
   allDogs.forEach(function (val, index){
@@ -319,6 +320,42 @@ const kateDogsData2 = [10, 5, 6, 1, 4];
 
 checkDogs(juliaDogsData1, kateDogsData1);
 checkDogs(juliaDogsData2, kateDogsData2);
+
+ */
+
+/*
+TODO: The MAP method:
+
+
+// Will loop through movements array to return a NEW array containing US dollars
+const  eurT0Usd = 1.1;
+
+const movementsUSD = movements.map(function (val){
+  return val * eurT0Usd;
+});
+
+// Same code but using arrow function
+const movementsUSDarrow = movements.map(val => val * eurT0Usd);
+
+
+const movementsDescriptions = movements.map((val, index, array) => {
+  const trans = val > 0 ? 'deposited': 'withdrew';
+
+  return `You ${trans} $${Math.abs(val)} at index: ${index + 1}`;
+});
+
+console.log(movementsDescriptions);
+
+
+// Same code as above when turning EUR into USD but using for loop
+const movementsUSDfor = [];
+for(const val of movements){
+  movementsUSDfor.push(val * eurT0Usd);
+}
+
+ */
+
+
 
 
 
