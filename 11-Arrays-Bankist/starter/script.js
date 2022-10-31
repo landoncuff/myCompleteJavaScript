@@ -98,6 +98,20 @@ const displayMovements = function (movements){
 displayMovements(account1.movements);
 
 
+/*
+TODO: Computing Usernames
+ */
+
+// Function to Lowercase, then splitting word, mapping out first letter, joining results back together
+// Will accept an array of accounts (objects)
+
+const createUsernames = function (accounts){
+  // adding username to account object
+ accounts.forEach(val => val.username = val.owner.toLowerCase().split(' ').map(val => val[0]).join(''));
+}
+
+createUsernames(accounts);
+
 
 
 /////////////////////////////////////////////////
@@ -354,6 +368,7 @@ for(const val of movements){
 }
 
  */
+
 
 
 
