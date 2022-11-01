@@ -114,6 +114,18 @@ createUsernames(accounts);
 
 
 
+/*
+TODO: Adding all the totals together using Reduce
+ */
+
+const calcDisplayBalance = function (movements){
+  const balance = movements.reduce((acc, movement) => acc + movement, 0);
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calcDisplayBalance(account1.movements);
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -247,7 +259,6 @@ movements.forEach(function(mov, i, arr){
 });
  */
 
-
 /*
 TODO: forEach with Maps and Sets:
 
@@ -368,6 +379,50 @@ for(const val of movements){
 }
 
  */
+
+/*
+TODO: The FILTER method:
+
+
+// creating an array of all deposits (above 0)
+const deposits = movements.filter(function (val, index, array){
+  // Only elements that make this condition true will be put into the new array
+  return val > 0;
+});
+
+const withdraw = movements.filter(val => val < 0);
+
+ */
+
+/*
+TODO: The REDUCE method:
+
+// Adding up all the numbers (first param is accumulator)
+const totalNum = movements.reduce(function (accumulator, currentValue, iteration, array){
+  // console.log(`Iteration ${iteration}: ${accumulator}`);
+  // adding the current value to the iteration
+ return accumulator + currentValue;
+}, 0); // second param is the number we begin at
+
+// acc keeps track of current sum
+const totalNum2 = movements.reduce((acc, curr) => acc + curr, 0);
+
+// Getting MAX value of the movements
+const maxValue = movements.reduce((acc, mov) => {
+  console.log(`Acc: ${acc}`);
+  console.log(`Mov: ${mov}`);
+  if(acc > mov){
+    return acc;
+  }else{
+    return mov;
+  }
+}, movements[0]);
+
+console.log(maxValue)
+
+ */
+
+
 
 
 
