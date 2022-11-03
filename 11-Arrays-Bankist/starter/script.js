@@ -125,6 +125,34 @@ const calcDisplayBalance = function (movements){
 
 calcDisplayBalance(account1.movements);
 
+/*
+TODO: Adding all values together
+ */
+
+const calcDisplaySummary = function (movements){
+  const incomes = movements
+    .filter(val => val > 0)
+    .reduce((acc, val) => acc + val, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(val => val < 0)
+    .reduce((acc, val) => acc + val, 0);
+  // using Math To filter out negative sign
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  // Calculating interest by creating new array 
+  const intrest = movements
+    .filter(val => val > 0)
+    .map(deposit => deposit * 1.2/100)
+    // Only putting interest on values greater or equal to 1
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${intrest}€`;
+}
+
+calcDisplaySummary(account1.movements);
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -465,8 +493,18 @@ calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
  */
 
+/*
+TODO: Chaining Methods:
 
+// Adding all the deposits together
+const converted = movements
+  .filter(val => val > 0)
+  .map(val => val * 1.1)
+  .reduce((acc, val) => acc + val, 0);
 
+console.log(converted);
+
+ */
 
 
 
