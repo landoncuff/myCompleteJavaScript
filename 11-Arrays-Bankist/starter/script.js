@@ -481,9 +481,6 @@ const calcAverageHumanAge = function (ages){
   // const averageAge2 = adults.reduce((acc, val) =>  acc + val, 0) / adults.length;
   const averageAge = adults.reduce((acc, val, i, array) =>  acc + val / array.length, 0);
 
-  const chain = ages.map(val => val <=2 ? 2 * val : 16 + val * 4).filter(val => val >= 18).reduce((acc, val, i, arr) => acc + val / arr.length, 0);
-  console.log(chain);
-
   return averageAge;
 }
 
@@ -505,6 +502,83 @@ const converted = movements
 console.log(converted);
 
  */
+
+/*
+TODO: Coding Challenge #3
+
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+
+const calcAverageHumanAge2 = age => age
+  .map(val => val <= 2 ? 2 * val : 16 + val * 4)
+  .filter(val => val >= 18)
+  .reduce((acc, val, i, arr) => acc + val / arr.length, 0);
+
+calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]);
+calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]);
+
+ */
+
+/*
+TODO: The FIND method:
+
+const firstWithdraw = movements.find(function (mov){
+  return mov < 0; // returns -400
+});
+
+console.log(firstWithdraw);
+console.log(movements);
+
+// Using the find method to find an object in the array
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis'); // Returns their object
+
+// Same code above but using for loop
+const foundObject = [];
+for(const acc of accounts){
+  if(acc.owner === 'Jessica Davis'){
+    foundObject.push(acc);
+  }else{
+    continue;
+  }
+}
+
+console.log(foundObject);
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
