@@ -85,7 +85,7 @@ const displayMovements = function (movements){
     const html = `
        <div class="movements__row">
           <div class="movements__type movements__type--${transaction}">${index + 1} ${transaction}</div>
-          <div class="movements__value">${val}</div>
+          <div class="movements__value">${val}€</div>
        </div>
     `;
 
@@ -95,7 +95,7 @@ const displayMovements = function (movements){
   });
 }
 
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 
 /*
@@ -118,40 +118,119 @@ createUsernames(accounts);
 TODO: Adding all the totals together using Reduce
  */
 
-const calcDisplayBalance = function (movements){
-  const balance = movements.reduce((acc, movement) => acc + movement, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function (account){
+  account.balance = account.movements.reduce((acc, movement) => acc + movement, 0);
+  labelBalance.textContent = `${account.balance}€`;
 }
 
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
 /*
 TODO: Adding all values together
  */
 
-const calcDisplaySummary = function (movements){
-  const incomes = movements
+const calcDisplaySummary = function (account){
+  const incomes = account.movements
     .filter(val => val > 0)
     .reduce((acc, val) => acc + val, 0);
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = account.movements
     .filter(val => val < 0)
     .reduce((acc, val) => acc + val, 0);
   // using Math To filter out negative sign
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
   // Calculating interest by creating new array 
-  const intrest = movements
+  const intrest = account.movements
     .filter(val => val > 0)
-    .map(deposit => deposit * 1.2/100)
+    .map(deposit => deposit * account.interestRate/100)
     // Only putting interest on values greater or equal to 1
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${intrest}€`;
 }
 
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1);
+
+
+
+// Function to be called whenever I need to update the UI
+const updateUI = function (account){
+  // display movements
+  displayMovements(account.movements);
+
+  // display balance
+  calcDisplayBalance(account);
+
+  // display summary
+  calcDisplaySummary(account);
+}
+
+
+/*
+TODO: Implementing Login
+ */
+
+let currentAccount;
+
+// Event listeners
+btnLogin.addEventListener('click', function (event){
+  // will prevent form from submitting at load
+  event.preventDefault();
+
+  // finding the user in the accounts array (will return undefined if cant find)
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+
+  // Checking to see if pin is correct (password)
+  // Using ? will only run if the value exists
+  if(currentAccount?.pin === Number(inputLoginPin.value)){
+    // Getting first name of the owner
+    labelWelcome.textContent = `Welcome Back, ${currentAccount.owner.split(' ')[0]}`;
+    // display UI for user (0 will hide it)
+    containerApp.style.opacity = '100';
+
+    // Updating the UI
+    updateUI(currentAccount);
+
+    // Empty username and password input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    // Lose focus
+    inputLoginPin.blur();
+  }
+});
+
+
+/*
+TODO: Implementing Transfers
+ */
+
+// Event handler
+btnTransfer.addEventListener('click', function (event){
+  event.preventDefault();
+
+  // getting the amount from the users input
+  const amount = Number(inputTransferAmount.value);
+
+  // getting the receiverAccount
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+
+  // checking to make sure user has enough money & to user exists
+  if(amount > 0 && receiverAcc && currentAccount.balance >= amount && receiverAcc?.username !== currentAccount.username){
+    // Add negative amount to from user
+    currentAccount.movements.push(-amount);
+
+    // Add positive amount to user
+    receiverAcc.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+  // Empty transfer amount and transfer to input fields
+  inputTransferAmount.value = inputTransferTo.value = '';
+  // Lose focus
+  inputTransferTo.blur();
+});
 
 
 /////////////////////////////////////////////////
