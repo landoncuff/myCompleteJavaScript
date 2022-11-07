@@ -233,6 +233,55 @@ btnTransfer.addEventListener('click', function (event){
 });
 
 
+/*
+TODO: Removing account from Database (account array)
+ */
+
+btnClose.addEventListener('click', function (event){
+  event.preventDefault();
+
+  // Checking to see if the credentials are correct
+  if(inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin){
+    // Finding the index of the user and using splice method to delete from array
+    const deleteUserIndex = accounts.findIndex(acc => acc.username === currentAccount.username);
+    accounts.splice(deleteUserIndex, 1);
+
+    // hide UI from user (100 will show it)
+    containerApp.style.opacity = '0';
+  }
+
+  // Empty close username and pin input fields
+  inputCloseUsername.value = inputClosePin.value = '';
+  // Lose focus
+  inputClosePin.blur();
+
+  // Setting welcome message back
+  labelWelcome.textContent = 'Log in to get started';
+
+});
+
+/*
+TODO: Request a loan
+ */
+
+btnLoan.addEventListener('click', function (event){
+  event.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  // If any value in the movements is greater or equal to 10% of loan
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)){
+    // Add movement to array
+    currentAccount.movements.push(amount);
+
+    //update UI
+    updateUI(currentAccount);
+  }
+  // clearing input field
+  inputLoanAmount.value = '';
+});
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -630,10 +679,27 @@ console.log(foundObject);
 
  */
 
+/*
+TODO: The Some & Every method:
 
+// Some Method:
+const anyDeposits = movements.some(mov => mov > 0);
 
+console.log(anyDeposits);
 
+// Every Method:
+const everyDeposits = movements.every(mov => mov > 0);
 
+console.log(everyDeposits);
+
+// Separate callback
+const deposit = mov => mov > 0;
+
+const testDeposit = movements.some(deposit);
+
+console.log(testDeposit)
+
+ */
 
 
 
