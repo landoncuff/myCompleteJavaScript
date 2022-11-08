@@ -67,17 +67,21 @@ TODO: PROJECT -- Bank-ist App:
  */
 
 /*
-TODO: Creating DOM Elements:
+TODO: Creating DOM Elements & Sorting the users movements:
  */
 
 // Display the users movements on the front page list
 
-const displayMovements = function (movements){
+const displayMovements = function (movements, sort = false){
   // Removing existing code in HTML that we are replacing
   containerMovements.innerHTML = '';
 
-  // Looping through account's 1 movements
-  movements.forEach(function (val, index){
+  // sorting the movements & using slice to make a copy
+  const movs = sort ? movements.slice().sort((a,b) => a - b) : movements;
+
+    // Looping through account's 1 movements
+  movs.forEach(function (val, index){
+
     // Determining if it is a deposit or withdraw
     const transaction = val > 0 ? 'deposit' : 'withdrawal';
 
@@ -280,6 +284,23 @@ btnLoan.addEventListener('click', function (event){
   // clearing input field
   inputLoanAmount.value = '';
 });
+
+
+/*
+TODO: sorting the movements
+ */
+
+let sorted = false;
+ btnSort.addEventListener('click', function (event){
+   event.preventDefault();
+
+   // Doing the opposite of sorted variable (sending true)
+   displayMovements(currentAccount.movements, !sorted);
+
+   // Toggling between true and false
+   sorted = !sorted;
+ });
+
 
 
 /////////////////////////////////////////////////
@@ -701,11 +722,91 @@ console.log(testDeposit)
 
  */
 
+/*
+TODO: Flat & flatMap Method:
+
+// We have an array with some arrays within it (nested array)
+const arr = [[1,2,3], [4,5,6], 7, 8];
+
+// putting them all together
+const flatarray = arr.flat();
+
+const arrDeep = [[[1,2,],3], [4,5,6], 7, 8];
+const twoLevelDeep = arrDeep.flat(2);
+
+const accountMovements = accounts.map(acc => acc.movements);
+// Array that contains ALL movements into one
+const allMovements = accountMovements.flat();
+
+// Adding all movements together
+const overallBalance = allMovements.reduce((acc, val) => acc + val, 0);
+
+console.log(overallBalance)
+
+// Same code but chaining
+const overallBalance2 = accounts
+  .map(val => val.movements)
+  .flat()
+  .reduce((acc, val) => acc + val, 0);
+console.log(overallBalance2);
 
 
+// FlatMap Method:
+
+// Same code as above but using flatmap
+const overallBalance3 = accounts
+  .flatMap(val => val.movements)
+  .reduce((acc, val) => acc + val, 0);
+console.log(overallBalance3);
+
+ */
+
+/*
+TODO: Sorting Arrays
 
 
+// Strings
+const owners = ['landon', 'jonas', 'zach', 'adam'];
 
+console.log(owners.sort());
+
+// Numbers
+
+// return < 0 -- A will be returned before B
+// return > 0 -- B will be returned before A
+
+// Ascending
+// movements.sort((a, b) => {
+//   if(a > b){
+//     return 1;
+//   }
+//
+//   if(a < b){
+//     return -1;
+//   }
+//
+// });
+movements.sort((a,b) => a - b);
+
+console.log(movements);
+
+
+// Descending
+// movements.sort((a, b) => {
+//   if(a > b){
+//     return -1;
+//   }
+//
+//   if(a < b){
+//     return 1;
+//   }
+//
+// });
+
+movements.sort((a,b) => b - a);
+console.log(movements);
+
+ */
 
 
 
