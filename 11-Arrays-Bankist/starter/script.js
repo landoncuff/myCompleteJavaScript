@@ -808,6 +808,40 @@ console.log(movements);
 
  */
 
+/*
+TODO: More Ways of Creating and Filling Arrays (Fill, From Method)
+
+const x = new Array(7); // Creates new empty argument with that length
+console.log(x);
+
+// Only method we can call on this array is the fill method that will fill the array
+// first param is the value, then the second param is the begin and third is the end
+
+x.fill(1); // returns an array full of 7 ones
+
+console.log(x);
+
+// creating a new array with 7 ones
+const y = Array.from({length: 7}, (curr, i) => 1);
+// using the _ when we dont need the param
+const z = Array.from({length: 7}, (_, i) => i + 1);
+console.log(y);
+console.log(z);
+
+// Do not have the movements from our app stored in an array
+// We are getting the movements from the user (turning their info into an array)
+// taking the current movement and removing the euro sign
+labelBalance.addEventListener('click', function (){
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'),
+      el => Number(el.textContent.replace('€', '')));
+
+  // Another way to create a new array
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI);
+});
+
+ */
+
 
 
 
