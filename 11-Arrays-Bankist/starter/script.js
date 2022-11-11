@@ -842,6 +842,10 @@ labelBalance.addEventListener('click', function (){
 
  */
 
+/*
+TODO: More Array Practice
+ */
+
 
 
 
