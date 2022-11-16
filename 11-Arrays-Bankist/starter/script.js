@@ -843,8 +843,89 @@ labelBalance.addEventListener('click', function (){
  */
 
 /*
-TODO: More Array Practice
+TODO: More Array Methods Practice
+
+// 1. calculate how much has been deposited in the bank
+
+// Creating a new array to hold all the movements
+// Using flatMap method to combine an array of arrays into one array
+// Removing only the positive values
+// Adding together all the positive values
+
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(acc => acc > 0)
+  .reduce((sum, cur) => sum + cur, 0); // Returns 25180
+
+
+
+
+// 2. Find the number of deposits that were at least 1,000 dollars
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .filter(acc => acc >= 1000)
+  .length; // Returns 6
+
+// Same code but using reduce
+const numDeposits1000Reduce = accounts
+  .flatMap(acc => acc.movements)
+  // adding one to the accumulator if value is greater than or equal to 1000
+  .reduce((accu, value) => value >= 1000 ? ++accu : accu, 0);
+
+
+
+
+
+// 3. Creating a new object from our movements using reduce method
+
+// Starting point needs to be an object if we are creating an object
+const sums = accounts
+  .flatMap(val => val.movements)
+  .reduce((accu, value) => {
+    value > 0 ? accu.deposits += value : accu.withdrawals += value;
+    return accu;
+  }, {deposits: 0, withdrawals: 0}); // starting point is an object
+
+
+// Same code as below but using object destructuring & fixing the reduce method
+const {deposits, withdrawals} = accounts
+  .flatMap(val => val.movements)
+  .reduce((accu, value) => {
+    accu[value > 0 ? 'deposits': 'withdrawals'] += value;
+    return accu;
+  }, {deposits: 0, withdrawals: 0}); // starting point is an object
+
+
+
+
+
+// 4. Create a function that will convert a string into a title case:
+
+const convertTitleCase = function (title){
+  const capitalized = str => str[0].toUpperCase() + str.slice(1);
+
+
+  // array for words that should not be capitalized
+  const exceptions = ['a', 'the', 'an', 'but', 'or', 'on', 'in', 'with', 'is', 'and'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => exceptions.includes(word) ? word : capitalized(word))
+    .join(' ');
+
+
+  return capitalized(titleCase);
+}
+
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a long title but not too long'));
+console.log(convertTitleCase('landon is really cool EXAMPLE'));
+console.log(convertTitleCase('and Randy is really cool EXAMPLE'));
  */
+
 
 
 
