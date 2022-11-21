@@ -974,7 +974,7 @@ console.log(dogs)
 // 2. Finds Sarahs dog and log to console if she eating too much or too little
 const dogSarah = dogs.find(dog => {
  const findOwner = dog.owners.find(owner => {
-    return owner == 'Sarah'? true: false;
+    return owner === 'Sarah'? true: false;
  });
  if(findOwner){
    // console.log(dog)
@@ -988,6 +988,41 @@ console.log(`Sarah's dog is eating ${dogSarah2.curFood > dogSarah2.recommendedFo
 
 
 
+// 3. An array of dogs that eat too much and an array of dogs that eat too little
+const ownersEatTooMuch = dogs
+  .map(dog => dog)
+  .filter(val => val.curFood > val.recommendedFood)
+  .flatMap(dogOwner => dogOwner.owners);
+
+const ownersEatTooLittle = dogs
+  .map(dog => dog)
+  .filter(val => val.curFood < val.recommendedFood)
+  .flatMap(dogOwner => dogOwner.owners);
+
+
+
+// 4. Log a string describing the values from question 3
+console.log(`${ownersEatTooLittle.map(owner => owner).join(' and ')} dogs eat too little!`);
+console.log(`${ownersEatTooMuch.map(owner => owner).join(' and ')} dogs eat too much!`);
+
+
+
+// 5. Log if there is a dog that eats exactly the right amount of food
+console.log(dogs.some(dog => dog.curFood === dog.recommendedFood));
+
+// 6. Log if there is a dog eating an OKAY amount of food
+console.log(dogs.some(dog => dog.curFood > (dog.recommendedFood * 0.90) && dog.curFood < (dog.recommendedFood * 1.10)));
+
+//7. An array of dogs that eating than OKAY amount of food
+const dogsEatingOkay = dogs.map(dog => dog).filter(dogVal => dogVal.curFood > (dogVal.recommendedFood * 0.90) && dogVal.curFood < (dogVal.recommendedFood * 1.10));
+console.log(dogsEatingOkay);
+
+
+// 8. Create shallow array that displays recommend food in order
+const recommendedFood = dogs.map(dog => dog.recommendedFood).sort();
+const test = recommendedFood.forEach(val => val);
+
+console.log(recommendedFood);
 
 
 
