@@ -958,7 +958,6 @@ HINT 2: Being within a range 10% above and below the recommended portion means: 
 Basically, the current portion should be between 90% and 110% of the recommended portion.
 
 GOOD LUCK 😀
- */
 
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
@@ -1002,27 +1001,34 @@ const ownersEatTooLittle = dogs
 
 
 // 4. Log a string describing the values from question 3
-console.log(`${ownersEatTooLittle.map(owner => owner).join(' and ')} dogs eat too little!`);
-console.log(`${ownersEatTooMuch.map(owner => owner).join(' and ')} dogs eat too much!`);
+console.log(`${ownersEatTooLittle.map(owner => owner).join(' and ')}'s dogs eat too little!`);
+console.log(`${ownersEatTooMuch.map(owner => owner).join(' and ')}'s dogs eat too much!`);
 
+// Teachers Code:
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
 
 
 // 5. Log if there is a dog that eats exactly the right amount of food
 console.log(dogs.some(dog => dog.curFood === dog.recommendedFood));
 
 // 6. Log if there is a dog eating an OKAY amount of food
-console.log(dogs.some(dog => dog.curFood > (dog.recommendedFood * 0.90) && dog.curFood < (dog.recommendedFood * 1.10)));
+const checkEatingOkay = dog =>
+  dog.curFood > (dog.recommendedFood * 0.90) && dog.curFood < (dog.recommendedFood * 1.10);
+
+console.log(dogs.some(dog => checkEatingOkay(dog)));
+
 
 //7. An array of dogs that eating than OKAY amount of food
-const dogsEatingOkay = dogs.map(dog => dog).filter(dogVal => dogVal.curFood > (dogVal.recommendedFood * 0.90) && dogVal.curFood < (dogVal.recommendedFood * 1.10));
+const dogsEatingOkay = dogs.filter(dogVal => checkEatingOkay(dogVal));
 console.log(dogsEatingOkay);
 
 
 // 8. Create shallow array that displays recommend food in order
-const recommendedFood = dogs.map(dog => dog.recommendedFood).sort();
-const test = recommendedFood.forEach(val => val);
+const dogsCopy = dogs.slice().sort((a,b) => a.recommendedFood - b.recommendedFood);
 
-console.log(recommendedFood);
+console.log(dogsCopy)
+
+ */
 
 
 
