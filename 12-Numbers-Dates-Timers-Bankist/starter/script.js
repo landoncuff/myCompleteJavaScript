@@ -253,7 +253,7 @@ btnSort.addEventListener('click', function (e) {
 // LECTURES
 
 
-// TODO: Converting and Checking Numbers
+/* TODO: Converting and Checking Numbers
 
 // All numbers in JavaScript are looked at as decimals even if you write an int
 console.log(23 === 23.0); // will return true
@@ -275,8 +275,30 @@ console.log(Number.isNaN(+'20X')); // Returns true
 
 console.log(Number.isFinite(+'20X')); // Returns false
 console.log(Number.isFinite(20)); // Returns true
+ */
+
+/*
+TODO: Math & Rounding
+ */
+
+// Square Root
+console.log(Math.sqrt(25));
+console.log(25 ** (1/2));
+// Cubic Root
+console.log(8 ** (1/3));
+
+console.log(Math.max(5, 18, 20, 4));
+console.log(Math.min(5, 18, 20, 4));
 
 
+// Calculate pixels of a circle with radios of 10 pixels
+console.log(Math.PI * Number.parseFloat('10px') ** 2);
+
+// Generate Random Numbers:
+console.log(Math.trunc(Math.random() * 6) + 1);
+// Getting random between two numbers
+const randomINT = (min, max) => Math.trunc(Math.random() * (max - min) + 1) + min;
+console.log(randomINT(1, 5));
 
 
 
