@@ -313,6 +313,125 @@ console.log((2.7).toFixed(0))
 
  */
 
+/*
+TODO: The Remainder Operator:
+
+console.log(5 % 2); // returns 1
+console.log(5 / 2); // 5 = 2 * 2 + 1
+
+console.log(8 % 3); // returns 2
+console.log(8 / 3); // 8 = 2 * 3 + 2
+
+// Find even or odd:
+
+const isEven = n => n % 2 === 0;
+
+console.log(isEven(8));
+console.log(isEven(5));
+console.log(isEven(6));
+console.log(isEven(4));
+
+// Changing every other row red and the other row blue
+labelBalance.addEventListener('click', function (){
+  // Spreading all the elements from the DOM into a new array
+  [...document.querySelectorAll('.movements__row')].forEach((val, i) => {
+    if(i % 2 === 0){
+      val.style.backgroundColor = 'orangered';
+    }
+    if(i % 3 === 0){
+      val.style.backgroundColor = 'blue';
+    }
+
+  });
+});
+ */
+
+/*
+TODO: Numeric Separators:
+
+// Get diameter of solar system
+// JavaScript will not read the _ scores when we write them
+const diameter = 287_460_000_000; // too hard to read
+
+// English we write (287,460,000,000) we can do that in code
+
+
+const price = 345_99; // Returns 34599
+ */
+
+/*
+TODO: Working with BigINT:
+
+// There is a limit to how big numbers can be
+// Test how many numbers we can use
+console.log(2 ** 53 - 1); // 9007199254740991
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+
+// If we need a bigger number than the safe integer
+
+// BigINT is used to store numbers no matter how big
+console.log(BigInt(744646728748274827429748289427));
+console.log(744646728748274827429748289427n);
+
+// Operations for BigINT
+console.log(10000n + 10000n); // returns 20,000
+
+// Mix BigINTs with regular numbers
+const huge = 744646728748274827429748289427n;
+const num = 23;
+// console.log(huge * num);// throws error
+console.log(huge * BigInt(num));// works
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
