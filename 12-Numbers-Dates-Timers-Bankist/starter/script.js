@@ -182,13 +182,49 @@ const updateUI = function (acc) {
 
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // // Fake always logged in:
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = '100';
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = '100';
 
+
+/*
+TODO: Implementing A Countdown Timer
+ */
+const startLogOutTimer = function (){
+
+  const tick = function (){
+    // Minutes and seconds
+    // Using Trunc to add no decimal places
+    const min = Math.trunc(time / 60).toString().padStart(2, '0');
+    const seconds = String(time % 60).padStart(2, '0'); // remainder of 60
+
+    // Each callback, print remaining time to the user interface
+    labelTimer.textContent = `${min}:${seconds}`;
+
+    // When time is 0, stop timer and log out user
+    if(time === 0){
+      // Killing the timer
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = '0';
+    }
+
+    // Decrease Time every second
+    time--;
+  }
+
+  // Set time to 5 minutes
+  let time = 180;
+
+  // Calling function right away so it starts at the right moment rather than 1
+  tick();
+  const timer = setInterval(tick, 1000); // Calling function every second
+
+  return timer;
+}
 
 // Login
 btnLogin.addEventListener('click', function (e) {
@@ -198,7 +234,6 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
 
   if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
@@ -221,6 +256,10 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+
+    // Checking for timer and starting logout timer:
+    if(timer) clearInterval(timer);
+    timer = startLogOutTimer();
 
     // Update UI
     updateUI(currentAccount);
@@ -249,6 +288,10 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movementsDates.push(new Date().toISOString());
     receiverAcc.movementsDates.push(new Date().toISOString());
 
+    // Resetting timer:
+    clearInterval(timer);
+    timer = startLogOutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -266,6 +309,10 @@ btnLoan.addEventListener('click', function (e) {
       currentAccount.movements.push(amount);
       // Add movement date
       currentAccount.movementsDates.push(new Date().toISOString());
+
+      // Resetting timer:
+      clearInterval(timer);
+      timer = startLogOutTimer();
 
       // Update UI
       updateUI(currentAccount);
@@ -605,6 +652,8 @@ const hour = setInterval(() => {
 }, 1000);
 
  */
+
+
 
 
 
