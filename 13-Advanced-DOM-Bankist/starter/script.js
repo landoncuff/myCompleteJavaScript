@@ -34,6 +34,44 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+////////////////////////////////////////////////////// Bankist Website ////////////////////////////////////////////
+
+/*
+TODO: Implementing Smooth Scrolling
+ */
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+// adding event
+btnScrollTo.addEventListener('click', function (event){
+  // getting element coordination's we want to scroll to
+  const s1coords = section1.getBoundingClientRect();// Will return attributes of section
+  const btncoords = event.target.getBoundingClientRect(); // getting btns attributes
+
+  // getting the current scroll position
+  console.log('current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  console.log('determining the viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+  // Scrolling the page
+  // We adding X & Y offset so it will always scroll from top of page rather than top of viewport
+  // window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset);
+
+
+  // making scrolling smooth
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth'
+  // });
+
+  // More modern way:
+  section1.scrollIntoView({
+    behavior: 'smooth'
+  })
+});
+
+////////////////////////////////////////////////////// Lecture Notes //////////////////////////////////////////////
+
 /*
 TODO: Selecting, Creating, and Deleting Elements
 
@@ -89,17 +127,61 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function 
 
  */
 
+/*
+TODO: Styles, Attributes, and Classes
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+message.textContent = 'We use cookies for improved functionality and analytics.'
+message.innerHTML = 'We use cookies for improved functionality and analytics.<button ' +
+  'class="btn btn--close-cookie">Got it!</button>';
+
+const header = document.querySelector('.header');
+header.append(message);
+
+///////////////////////////////////////////////// Styles ////////////////////////////////////////////////////////
+
+// Adding a background color
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+// Read styles
+const readStyles = getComputedStyle(message).height;
+// Increasing current style by 40px
+message.style.height = Number.parseFloat(getComputedStyle(message).height) + 40 + 'px';
+
+// Creating CSS variables
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+///////////////////////////////////////////////// Attributes ////////////////////////////////////////////////////////
+
+// getting the logo from the HTML page
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src); // Will return absolute URL
+console.log(logo.className);
+console.log(logo.id);
+
+// Non-standard:
+console.log(logo.getAttribute('designer'));
+
+logo.alt = 'Beautiful minimalist logo';
+logo.setAttribute('designer', 'Landon Cuff');
+logo.getAttribute('scr');
+
+// Data attributes
+console.log(logo.dataset.versionNumber)
 
 
+///////////////////////////////////////////////// Classes ////////////////////////////////////////////////////////
 
+logo.classList.add('c', 'j'); // adding class c and j
+logo.classList.remove('c', 'j'); // removing class c and j
+logo.classList.toggle('c'); // toggling class c
+logo.classList.contains('c'); // checking for class c
+logo.className = 'Landon' // DONT USE
 
-
-
-
-
-
-
-
+ */
 
 
 
