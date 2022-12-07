@@ -183,8 +183,61 @@ logo.className = 'Landon' // DONT USE
 
  */
 
+/*
+TODO: Types of Events and Event Handlers
 
+////////////////////////////////////////////////////// Mouse Enter Event ///////////////////////////////////////////
+const h1 = document.querySelector('h1');
+h1.addEventListener('mouseenter', function (e){
+  alert('addEvent Listener: Great! You are reading the heading')
+});
 
+h1.onmouseenter = function (e){
+  alert('addEvent Listener: Great! You are reading the heading')
+};
+
+// Remove event handler
+const alertH1 = function (e){
+  alert('addEvent Listener: Great! You are reading the heading');
+
+  // h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+// Removing event after a certain amount of time has passed
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+ */
+
+/*
+TODO: Event Propagation in Practice
+
+/////////////////////////////////////////// Bubbling ////////////////////////////////////////////////////////////
+
+// Creating the random color
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () => `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`
+
+// Adding event handler to the whole nav & each link
+document.querySelector('.nav__link').addEventListener('click', function (e){
+  // Points to the event handler that is attached (the link)
+  this.style.backgroundColor = randomColor();
+  console.log('Link', e.target);
+  console.log('Link', e.currentTarget);
+
+  // Stop Propagation from happening (the parents getting clicked)
+  e.stopPropagation();
+});
+document.querySelector('.nav__links').addEventListener('click', function (e){
+  this.style.backgroundColor = randomColor();
+  console.log('Container', e.target);
+  console.log('Container', e.currentTarget);
+});
+document.querySelector('.nav').addEventListener('click', function (e){
+});
+
+ */
 
 
 
