@@ -3,10 +3,17 @@
 ///////////////////////////////////////
 // Modal window
 
+////////////////////////////////////////////////////// Bankist Website ////////////////////////////////////////////
+
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+const navLinks = document.querySelectorAll('.nav__link');
+const navBar = document.querySelector('.nav__links');
+
 
 const openModal = function (event) {
   event.preventDefault();
@@ -34,14 +41,9 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-////////////////////////////////////////////////////// Bankist Website ////////////////////////////////////////////
-
 /*
 TODO: Implementing Smooth Scrolling
  */
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 // adding event
 btnScrollTo.addEventListener('click', function (event){
   // getting element coordination's we want to scroll to
@@ -68,6 +70,24 @@ btnScrollTo.addEventListener('click', function (event){
   section1.scrollIntoView({
     behavior: 'smooth'
   })
+});
+
+/*
+TODO: Event Delegation: Implementing Page Navigation
+ */
+// Event Delegation Navigation:
+// Adding event to parent
+navBar.addEventListener('click', function (e){
+  e.preventDefault();
+  // where the event happened
+  console.log(e.target)
+  // matching to make sure its the ones we want
+  if(e.target.classList.contains('nav__link')){
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: "smooth"
+    });
+  }
 });
 
 ////////////////////////////////////////////////////// Lecture Notes //////////////////////////////////////////////
@@ -239,9 +259,43 @@ document.querySelector('.nav').addEventListener('click', function (e){
 
  */
 
+/*
+TODO: DOM Traversing:
+
+const h1 = document.querySelector('h1');
+
+// Walking through the DOM downwards (getting all child elements):
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children); // LIVE connection
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+console.log(h1.firstChild);
+
+// Walking through DOM upwards (getting all parent elements):
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// Not a direct parent but closest to our element
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+h1.closest('h1').style.background = 'var(--gradient-primary)';
 
 
+// Walking sideways (getting siblings)
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
 
+console.log(h1.nextElementSibling)
+console.log(h1.previousElementSibling)
+// getting all siblings
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach(el => {
+  // setting all siblings to 50% except for the header
+  if(el !== h1) el.style.transform = 'scale(0.5)';
+});
+
+ */
 
 
 
