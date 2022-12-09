@@ -13,6 +13,10 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const navLinks = document.querySelectorAll('.nav__link');
 const navBar = document.querySelector('.nav__links');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
 
 
 const openModal = function (event) {
@@ -89,6 +93,62 @@ navBar.addEventListener('click', function (e){
     });
   }
 });
+
+/*
+TODO: Building a Tabbed Component
+ */
+tabsContainer.addEventListener('click', function (e){
+  const clicked = e.target.closest('.operations__tab'); // getting the closest element that matches
+
+  // ignoring any clicks that return null (Will exit the function)
+  if(!clicked) return;
+
+  // Removing class from ALL tabs
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+
+  // Deactivating the current tab content
+  tabsContent.forEach(tabCon => tabCon.classList.remove('operations__content--active'));
+
+  // Adding the active class to the current tab selected
+  clicked.classList.add('operations__tab--active');
+
+  // Activating the data for tab
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`) // Stored as data-tab
+    .classList.add('operations__content--active');
+});
+
+/*
+TODO: Passing Arguments to Event Handlers
+ */
+
+const handleHover = function (e){
+  if(e.target.classList.contains('nav__link')){
+    const link = e.target;
+
+    // selecting all other links (siblings)
+    // finding nearest parent and then finding sibs
+    const siblings = link
+      .closest('.nav')
+      .querySelectorAll('.nav__link');
+
+    const logo = link.closest('nav').querySelector('img');
+
+    // Changing the Opacity of each sibling
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = this;
+    });
+
+    // Changing the Opacity of the logo
+    logo.style.opacity = this;
+  }
+}
+
+// Using the BIND method to create new function call and use "this" keyword
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind('0.5'));
+nav.addEventListener('mouseout', handleHover.bind('1'));
+
 
 ////////////////////////////////////////////////////// Lecture Notes //////////////////////////////////////////////
 
@@ -296,6 +356,7 @@ console.log(h1.parentElement.children);
 });
 
  */
+
 
 
 
