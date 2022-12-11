@@ -149,6 +149,29 @@ const handleHover = function (e){
 nav.addEventListener('mouseover', handleHover.bind('0.5'));
 nav.addEventListener('mouseout', handleHover.bind('1'));
 
+/*
+TODO: Implementing a Sticky Navigation: The Intersection Observer API
+ */
+
+// How to use Intersection Observer API
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect();
+const stickyNav = function (entries, observer){
+  // getting the first element
+  const [entry] = entries;
+  entry.isIntersecting ? nav.classList.remove('sticky') : nav.classList.add('sticky');
+}
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null, // Null will become the viewport
+  threshold: 0, // will determine how much of the section we want in the viewport
+  // 90 is the height of the navigation
+  rootMargin: `-${navHeight.height}px` // Will be applied outside the threshold
+});
+
+headerObserver.observe(header);
+
 
 ////////////////////////////////////////////////////// Lecture Notes //////////////////////////////////////////////
 
