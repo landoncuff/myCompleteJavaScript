@@ -17,6 +17,10 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
+const allSections = document.querySelectorAll('.section');
+// Getting all images that have attribute of data-src
+const allLazyLoadingImages = document.querySelectorAll('img[data-src]');
+console.log(allLazyLoadingImages)
 
 
 const openModal = function (event) {
@@ -171,6 +175,64 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 
 headerObserver.observe(header);
+
+/*
+TODO: Revealing Elements On Scroll
+ */
+
+const revealSectionCallBack = function (entries, observer){
+  const [entry] = entries; // getting first element using destructuring
+  if(!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+
+  // unobserve when the user is done scrolling
+  observer.unobserve(entry.target); // Saves performance
+}
+
+const sectionObserver = new IntersectionObserver(revealSectionCallBack, {
+  root: null, // Looking at whole page (viewport)
+  threshold: 0.15
+});
+
+// Observe all four sections
+allSections.forEach(function (section){
+  sectionObserver.observe(section);
+  // hiding all sections
+  section.classList.add('section--hidden');
+});
+
+/*
+TODO: Lazy Loading Images
+ */
+
+const lazyLoadingCallBack = function (entries, observer){
+  const [entry] = entries;
+  console.log(entry);
+  if(!entry.isIntersecting) return;
+
+  // replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+
+  // Will be way too slow
+  // entry.target.classList.remove('lazy-img');
+
+  // remove blur on image when the loading of image is done
+  entry.target.addEventListener('load', function (e){
+    entry.target.classList.remove('lazy-img');
+  });
+
+  // Stop the observing
+  observer.unobserve(entry.target);
+}
+
+const lazyLoadingObserver = new IntersectionObserver(lazyLoadingCallBack, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px' // having the image load before the threshold is reached
+});
+
+allLazyLoadingImages.forEach(img => lazyLoadingObserver.observe(img));
 
 
 ////////////////////////////////////////////////////// Lecture Notes //////////////////////////////////////////////
