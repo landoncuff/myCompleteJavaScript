@@ -20,7 +20,11 @@ const nav = document.querySelector('.nav');
 const allSections = document.querySelectorAll('.section');
 // Getting all images that have attribute of data-src
 const allLazyLoadingImages = document.querySelectorAll('img[data-src]');
-console.log(allLazyLoadingImages)
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const sliderBtnLeft = document.querySelector('.slider__btn--left');
+const sliderBtnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
 
 
 const openModal = function (event) {
@@ -53,32 +57,16 @@ document.addEventListener('keydown', function (e) {
 TODO: Implementing Smooth Scrolling
  */
 // adding event
-btnScrollTo.addEventListener('click', function (event){
-  // getting element coordination's we want to scroll to
-  const s1coords = section1.getBoundingClientRect();// Will return attributes of section
-  const btncoords = event.target.getBoundingClientRect(); // getting btns attributes
-
-  // getting the current scroll position
-  console.log('current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
-  console.log('determining the viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
-
-  // Scrolling the page
-  // We adding X & Y offset so it will always scroll from top of page rather than top of viewport
-  // window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset);
-
-
-  // making scrolling smooth
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth'
-  // });
-
-  // More modern way:
-  section1.scrollIntoView({
-    behavior: 'smooth'
-  })
-});
+// btnScrollTo.addEventListener('click', function (event){
+//   // getting element coordination's we want to scroll to
+//   const s1coords = section1.getBoundingClientRect();// Will return attributes of section
+//   const btncoords = event.target.getBoundingClientRect(); // getting btns attributes
+//
+//   // More modern way:
+//   section1.scrollIntoView({
+//     behavior: 'smooth'
+//   })
+// });
 
 /*
 TODO: Event Delegation: Implementing Page Navigation
@@ -199,7 +187,7 @@ const sectionObserver = new IntersectionObserver(revealSectionCallBack, {
 allSections.forEach(function (section){
   sectionObserver.observe(section);
   // hiding all sections
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 /*
@@ -208,7 +196,6 @@ TODO: Lazy Loading Images
 
 const lazyLoadingCallBack = function (entries, observer){
   const [entry] = entries;
-  console.log(entry);
   if(!entry.isIntersecting) return;
 
   // replace src with data-src
@@ -234,7 +221,89 @@ const lazyLoadingObserver = new IntersectionObserver(lazyLoadingCallBack, {
 
 allLazyLoadingImages.forEach(img => lazyLoadingObserver.observe(img));
 
+/*
+TODO: Building a Slider Component: Part 1 && Part 2
+ */
+const Slider = function () {
+  // Current Slide
+  let curSlide = 0;
+  const maxSlide = slides.length - 1; // Making it 0 index
 
+  // Functions
+  const goToSlide = function (curSlide) {
+    // First slide 0%, Second slide 100%, Third slide 200%, Fourth slide 300%,
+    slides.forEach((slide, i) => slide.style.transform = `translateX(${100 * (i - curSlide)}%)`);
+  }
+  const nextSlide = function () {
+    if (curSlide === maxSlide) {
+      // send back to first slide
+      curSlide = 0;
+    } else {
+      // Change the percentages of the translateX()
+      curSlide++;
+    }
+    // curSlide == 1 :  -100%, 0%, 100%, 200%
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  }
+  const prevSlide = function () {
+    if (curSlide <= 0) {
+      curSlide = 0;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  }
+  const createDots = function () {
+    slides.forEach((slide, i) => {
+      dotContainer.insertAdjacentHTML('beforeend', // adding as last child
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  }
+  const activateDot = function (curSlide) {
+    // Deactivate them all
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+    // Getting the current dot selected by looking for its data attribute
+    document
+      .querySelector(`.dots__dot[data-slide="${curSlide}"]`)
+      .classList.add('dots__dot--active');
+  }
+
+  // Will run and create everything when the application is loaded
+  const init = function () {
+    goToSlide(0);
+    createDots();
+    activateDot(0);
+  }
+
+  init();
+
+
+  // Event Handlers
+  sliderBtnRight.addEventListener('click', nextSlide);
+  sliderBtnLeft.addEventListener('click', prevSlide);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') prevSlide();
+    // Both methods work
+    e.key === 'ArrowRight' && nextSlide();
+  });
+  dotContainer.addEventListener('click', function (e) {
+    // event dedication (adding event to parent of dots)
+    // finding the correct dot
+    if (e.target.classList.contains('dots__dot')) {
+      // Use destructuring because the variable and value are named the same
+      const {slide} = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+}
+Slider();
 ////////////////////////////////////////////////////// Lecture Notes //////////////////////////////////////////////
 
 /*
