@@ -511,7 +511,27 @@ console.log(h1.parentElement.children);
 
  */
 
+/*
+TODO: Lifecycle DOM Events
 
+// DOM content loaded (soon as the HTML has been downloaded and converted into the DOM tree)
+document.addEventListener('DOMContentLoaded', function (e){
+  console.log(e)
+});
+
+// Load Event
+window.addEventListener('load', function (e){
+  console.log("load event:", e);
+});
+
+// Before Unload
+window.addEventListener('beforeunload', function (e){
+  e.preventDefault();
+  console.log('Exit', e);
+  e.returnValue = '';
+});
+
+ */
 
 
 
