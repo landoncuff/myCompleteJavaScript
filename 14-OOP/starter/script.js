@@ -66,6 +66,51 @@ console.log(landon.hasOwnProperty('species')); // false
  */
 
 
+/*
+TODO: Prototype Inheritance on Built-In Objects:
+ */
+
+const Person = function (firstName, birthYear){
+  // Adding values to the newly created object (instance properties)
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+}
+
+// Creating a new instance of each constructor function
+const landon = new Person('Landon', 1996);
+
+Person.prototype.calcAge = function (){
+  console.log(2037 - this.birthYear);
+}
+
+// Calling the new method inside the constructor function
+landon.calcAge();
+
+console.log(landon.__proto__);
+// Object.prototype (top of prototype chain)
+console.log(landon.__proto__.__proto__);
+// null because we have already reached the top
+console.log(landon.__proto__.__proto__.__proto__);
+
+// getting the function itself
+console.dir(Person.prototype.constructor);
+
+
+// Prototype of Arrays:
+
+const arr = [1,2,3,4, 4, 3, 2, 5, 7, 8, 9, 8];
+// Same code as above: new Array = [];
+console.log(arr.__proto__ === Array.prototype);
+
+// Creating a new prototype for all of my arrays in my program
+Array.prototype.unique = function (){
+  return [...new Set(this)]; // will return an array with no duplicates
+}
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+
 
 
 
