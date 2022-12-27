@@ -65,10 +65,8 @@ console.log(landon.hasOwnProperty('species')); // false
 
  */
 
-
 /*
 TODO: Prototype Inheritance on Built-In Objects:
- */
 
 const Person = function (firstName, birthYear){
   // Adding values to the newly created object (instance properties)
@@ -111,15 +109,48 @@ console.log(arr.unique());
 
 const h1 = document.querySelector('h1');
 
+ */
 
+/*
+TODO: Coding Challenge #1
+1. Use a constructor function to implement a Car. A car has a make and a speed property.
+   The speed property is the current speed of the car in km/h;
+2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new speed to the console;
+3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
 
+DATA CAR 1: 'BMW' going at 120 km/h
+DATA CAR 2: 'Mercedes' going at 95 km/h
 
+GOOD LUCK 😀
+ */
 
+// Step #1 -- Constructor function
+const Car = function (make, speed){
+  this.make = make;
+  this.speed = speed;
+}
+const honda = new Car('Honda', 60);
 
+// Step #2 -- New Method to add 10 to speed
+Car.prototype.accelerate = function (){
+  this.speed = this.speed + 10;
+}
+honda.accelerate();
 
+// Step #3 -- New Method to decrease speed
+Car.prototype.brake = function (){
+  this.speed = this.speed - 5;
+}
+honda.brake();
 
+// Step #4 -- Call the two new methods on different objects
+const toyoda = new Car('Toyoda', 40);
+const ford = new Car('Ford', 30);
 
-
+toyoda.accelerate();
+ford.brake();
+console.log(ford, toyoda);
 
 
 
