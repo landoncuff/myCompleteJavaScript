@@ -123,7 +123,6 @@ DATA CAR 1: 'BMW' going at 120 km/h
 DATA CAR 2: 'Mercedes' going at 95 km/h
 
 GOOD LUCK 😀
- */
 
 // Step #1 -- Constructor function
 const Car = function (make, speed){
@@ -134,13 +133,13 @@ const honda = new Car('Honda', 60);
 
 // Step #2 -- New Method to add 10 to speed
 Car.prototype.accelerate = function (){
-  this.speed = this.speed + 10;
+  this.speed += 10;
 }
 honda.accelerate();
 
 // Step #3 -- New Method to decrease speed
 Car.prototype.brake = function (){
-  this.speed = this.speed - 5;
+  this.speed -= 5;
 }
 honda.brake();
 
@@ -150,16 +149,168 @@ const ford = new Car('Ford', 30);
 
 toyoda.accelerate();
 ford.brake();
+ford.accelerate();
+ford.accelerate();
+ford.brake();
+
 console.log(ford, toyoda);
 
+ */
 
+/*
+TODO: ES6 Classes
 
+// Class Expression
+// const PersonClass = class{}
 
+// Class Declaration
+class PersonClass {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // Everything written outside of the constructor will be in the prototype
+  // Creating methods
+  calcAge(){
+    console.log(2037 - this.birthYear);
+  }
+}
 
+const landon = new PersonClass('Robert', 1996);
+landon.calcAge();
 
+// We can still add to the prototype:
+PersonClass.prototype.greet = function (){
+  console.log(`Hello ${this.firstName}`);
+}
+landon.greet();
 
+ */
 
+/*
+TODO: Setters & Getters
 
+const account = {
+  owner: 'Landon',
+  movements: [1, 300, 250, 5],
+  get latest(){
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov){
+    this.movements.push(mov);
+  }
+};
+console.log(account.latest)
+
+account.latest = 10;
+
+class PersonClass {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge(){
+    console.log(2037 - this.birthYear);
+  }
+
+  get age(){
+    return 2037 - this.birthYear;
+  }
+
+  // Doing some data validation
+  set fullName(name){
+    if(name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName(){
+    return this._fullName;
+  }
+}
+
+const landon = new PersonClass('Robert Cuff', 1996);
+const kassidy = new PersonClass('Kassidy Cuff', 1999);
+
+console.log(landon.fullName);
+console.log(kassidy.fullName);
+
+ */
+
+/*
+TODO: Static Methods
+
+// Constructor Function:
+const Person = function (firstName, birthYear){
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+}
+
+// ES6 Class:
+class PersonClass {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods
+  calcAge(){
+    console.log(2037 - this.birthYear);
+  }
+
+  // static method
+  static hey(){
+    console.log('hello Friend');
+    console.log(this);
+  }
+}
+
+const landon = new Person('Landon', 1996);
+const kassidy = new PersonClass('Kassidy', 1999);
+
+// Adding a static method
+Person.hey = function () {
+  console.log(`hey there`);
+  console.log(this); // returns function
+}
+Person.hey();
+landon.hey(); // Throws error. Only exists on the actual constructor
+
+// Class
+PersonClass.hey();
+kassidy.hey();
+
+ */
+
+/*
+TODO: Object.create
+
+// Object we want to be the prototype of all other objects
+const PersonProto = {
+  calcAge(){
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear){
+    this.birthYear = birthYear;
+    this.firstName = firstName;
+  }
+};
+
+// creating a person object that will use object proto
+
+// Created an empty object that has the prototype of the object above
+const landon = Object.create(PersonProto);
+landon.firstName = 'Landon';
+landon.birthYear = 1996;
+console.log(landon);
+landon.calcAge();
+console.log(landon.__proto__ === PersonProto); // Returns true
+
+const kassidy = Object.create(PersonProto);
+kassidy.init("Kassidy", 1999);
+kassidy.calcAge();
+
+ */
 
 
 
