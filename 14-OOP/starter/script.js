@@ -460,9 +460,193 @@ console.log(tesla);
 
  */
 
+/*
+TODO: Inheritance Between "Classes":: ES6 Class
 
+class PersonClass {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
 
+  calcAge(){
+    console.log(2037 - this.birthYear);
+  }
 
+  greet(){
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age(){
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name){
+    if(name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName(){
+    return this._fullName;
+  }
+
+  // Static method:
+  static hey(){
+    console.log('Hey there');
+  }
+}
+
+// Creating new Student Class
+class StudentClass extends PersonClass{
+  constructor(fullName, birthYear, course) {
+    // Needs to happen first
+    super(fullName, birthYear); // Is the constructor function of the parent class
+    this.course = course;
+  }
+
+  introduce(){
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  // Method inside the child class calling the same method inside the parent class
+  // calcAge() {
+  //   super.calcAge();
+  // }
+  calcAge(){
+    console.log(`I'm ${2037 - this.birthYear}`);
+  }
+}
+
+const landon = new StudentClass('Landon Cuff', 2012, 'Computer Science');
+landon.introduce();
+landon.calcAge();
+landon.greet();
+landon.age;
+
+ */
+
+/*
+TODO: Inheritance Between "Classes":: Object.create
+
+// Will be the parent class:
+const PersonProto = {
+  init(firstName, birthYear){
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+  calcAge(){
+    console.log(2037 - this.birthYear);
+  },
+  greet(){
+    console.log(`Hello there, ${this.firstName}`);
+  }
+}
+
+// Prototype of the student object
+const StudentProto = Object.create(PersonProto);
+// Creating a new method
+StudentProto.init = function (firstName, birthYear, course){
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+}
+// Creating another method:
+StudentProto.introduce = function (){
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+const jay = Object.create(StudentProto);
+jay.init('Landon', 2012, 'Computer Science');
+jay.introduce();
+jay.calcAge();
+jay.greet();
+console.log(jay);
+
+ */
+
+/*
+TODO: Another Class Example:
+
+class Account {
+  constructor(ownerName, currency, pin) {
+    this.owner = ownerName;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${ownerName}`);
+  }
+  // Public Interface of our object
+  deposit(val){
+    this.movements.push(val);
+  }
+  withdraw(val){
+    this.deposit(-val);
+  }
+  approveLoan(val){
+    return true;
+  }
+  requestLoan(val) {
+    if(this.approveLoan(val)){
+      this.deposit(val);
+      console.log('Loan Approved');
+    }
+  }
+}
+const acc1 = new Account('Landon', 'US', 1111);
+// Bad
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+// Good
+acc1.deposit(250);
+acc1.withdraw(140);
+
+console.log(acc1);
+
+ */
+
+/*
+TODO: Encapsulation: Protected Properties and Methods
+ */
+class Account {
+  constructor(ownerName, currency, pin) {
+    this.owner = ownerName;
+    this.currency = currency;
+    // Protecting the pin property
+    this._pin = pin;
+    // Protected property
+    this._movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${ownerName}`);
+  }
+  // Public Interface of our object
+  getMovements(){
+    return this._movements;
+  }
+  deposit(val){
+    this._movements.push(val);
+  }
+  withdraw(val){
+    this.deposit(-val);
+  }
+  // Protecting the method
+  _approveLoan(val){
+    return true;
+  }
+  requestLoan(val) {
+    if(this._approveLoan(val)){
+      this.deposit(val);
+      console.log('Loan Approved');
+    }
+  }
+}
+const acc1 = new Account('Landon', 'US', 1111);
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+
+// Correct way to get the movements
+console.log(acc1.getMovements());
 
 
 
