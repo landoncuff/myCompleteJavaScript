@@ -606,7 +606,7 @@ console.log(acc1);
 
 /*
 TODO: Encapsulation: Protected Properties and Methods
- */
+
 class Account {
   constructor(ownerName, currency, pin) {
     this.owner = ownerName;
@@ -648,9 +648,101 @@ acc1.requestLoan(1000);
 // Correct way to get the movements
 console.log(acc1.getMovements());
 
+ */
+
+/*
+TODO: Encapsulation: Private Class Fields & Methods
+
+class Account {
+  // Public Fields (instances):
+  locale = navigator.language;
 
 
+  // Private Fields:
+  #movements = [];
+  #pin; // creating empty variable
 
+  constructor(ownerName, currency, pin) {
+    this.owner = ownerName;
+    this.currency = currency;
+    this.#pin = pin;
+    console.log(`Thanks for opening an account ${ownerName}`);
+  }
+
+  // Public Methods (interface):
+  getMovements(){
+    return this.#movements;
+  }
+  deposit(val){
+    this.#movements.push(val);
+  }
+  withdraw(val){
+    this.deposit(-val);
+  }
+  requestLoan(val) {
+    if(this._approveLoan(val)){
+      this.deposit(val);
+      console.log('Loan Approved');
+    }
+  }
+
+  // Private Methods (#approveLoan):
+  _approveLoan(val){
+    return true;
+  }
+}
+const acc1 = new Account('Landon', 'US', 1111);
+acc1.deposit(130);
+acc1.withdraw(20);
+acc1.requestLoan(130);
+console.log(acc1.getMovements());
+
+ */
+
+/*
+TODO: Chaining Methods
+
+class Account {
+  locale = navigator.language;
+  #movements = [];
+  #pin;
+
+  constructor(ownerName, currency, pin) {
+    this.owner = ownerName;
+    this.currency = currency;
+    this.#pin = pin;
+    console.log(`Thanks for opening an account ${ownerName}`);
+  }
+
+  getMovements(){
+    return this.#movements;
+  }
+  deposit(val){
+    this.#movements.push(val);
+    return this;
+  }
+  withdraw(val){
+    this.deposit(-val);
+    return this;
+  }
+  requestLoan(val) {
+    if(this._approveLoan(val)){
+      this.deposit(val);
+      console.log('Loan Approved');
+      return this;
+    }
+  }
+
+  _approveLoan(val){
+    return true;
+  }
+}
+const acc1 = new Account('Landon', 'US', 1111);
+
+// Chaining Methods:
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(120).withdraw(400);
+
+ */
 
 
 
