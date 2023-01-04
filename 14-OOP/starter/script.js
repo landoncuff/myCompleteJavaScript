@@ -744,6 +744,63 @@ acc1.deposit(300).deposit(500).withdraw(35).requestLoan(120).withdraw(400);
 
  */
 
+/*
+TODO: Coding Challenge #4:
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update
+    the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+ */
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate(){
+    this.speed += 10;
+  }
+
+  brake(){
+    this.speed -= 5;
+    return this;
+  }
+}
+
+const honda = new Car("Honda", 140);
+
+// Step 1: Create child class
+class EVCL extends Car{
+  // Step 2: Make charge private
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo){
+    this.#charge = chargeTo;
+    // Step 3: Allowing chaining
+    return this;
+  }
+
+  accelerate1() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(`${this.make} is going ${this.speed} km/h, with charge of ${this.#charge}%`);
+    return this;
+  }
+}
+
+const rivian = new EVCL("Rivian", 120, 23);
+rivian.accelerate1();
+// Step 3: Chaining the different methods
+rivian.accelerate1().chargeBattery(90).brake().accelerate1().accelerate1().brake().chargeBattery(30);
+console.log(rivian);
 
 
 
