@@ -11,6 +11,71 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+/*
+TODO: Refactoring for Project Architecture:
+ */
+
+class App {
+  #map;
+  #mapEvent;
+  constructor() {
+    this._getPosition();
+    form.addEventListener('submit', this._newWorkout.bind(this));
+    inputType.addEventListener('change', this._toggleElevationField.bind(this));
+  }
+
+  _getPosition(){
+    navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), function (){
+      alert('Could not get your current location');
+    });
+  }
+
+  _loadMap(position){
+    const {latitude} = position.coords;
+    const {longitude} = position.coords;
+    const coords = [latitude, longitude];
+
+    this.#map = L.map('map').setView(coords, 13); // Second param is the zoom
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.#map);
+
+    this.#map.on('click', this._showForm.bind(this));
+  }
+
+  _showForm(leafMapEvent){
+    this.#mapEvent = leafMapEvent;
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
+
+  _toggleElevationField(){
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+  }
+
+  _newWorkout(event){
+    event.preventDefault();
+    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+
+    const {lat, lng} = this.#mapEvent.latlng;
+    L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: 'running-popup'
+        })
+      ).setPopupContent('Workout')
+      .openPopup();
+  }
+}
+
+const app = new App();
+
 
 /*
 TODO: Geolocation API
@@ -149,13 +214,6 @@ inputType.addEventListener('change', function (e){
 });
 
  */
-
-
-
-
-
-
-
 
 
 
