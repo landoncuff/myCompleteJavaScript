@@ -338,7 +338,8 @@ getCountryData('djakfjdsd'); // throws 404 error
 /*
 TODO: Coding Challenge #1
 
-In this challenge you will build a function 'whereAmI' which renders a country ONLY based on GPS coordinates. For that, you will use a second API to geocode coordinates.
+In this challenge you will build a function 'whereAmI' which renders a country ONLY based on GPS coordinates.
+For that, you will use a second API to geocode coordinates.
 
 Here are your tasks:
 
@@ -357,8 +358,11 @@ PART 1
   to reject the promise yourself, with a meaningful error message.
 
 PART 2
-6. Now it's time to use the received data to render a country. So take the relevant attribute from the geocoding API result, and plug it into the countries API that we have been using.
-7. Render the country and catch any errors, just like we have done in the last lecture (you can even copy this code, no need to type the same code)
+6. Now it's time to use the received data to render a country.
+  So take the relevant attribute from the geocoding API result,
+  and plug it into the countries API that we have been using.
+7. Render the country and catch any errors, just like we have done in the last lecture
+  (you can even copy this code, no need to type the same code)
 
 TEST COORDINATES 1: 52.508, 13.381 (Latitude, Longitude)
 TEST COORDINATES 2: 19.037, 72.873
@@ -367,13 +371,112 @@ TEST COORDINATES 2: -33.933, 18.474
 GOOD LUCK 😀
  */
 
+// Code from lecture
+const renderCountry = function (data, className = ""){
+  const html = `
+        <article class="country ${className}">
+          <img class="country__img" src="${data.flag}" />
+          <div class="country__data">
+            <h3 class="country__name">${data.name}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)} people</p>
+            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+          </div>
+        </article>
+  `;
+
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  // now handled in the finally method
+  // countriesContainer.style.opacity = 1;
+}
+const renderError = function (message){
+  countriesContainer.insertAdjacentText('beforeend', message);
+  // now handled in the finally method
+  // countriesContainer.style.opacity = '1';
+}
+
+// Setting default message
+const getJSON = function (url, errorMsg = 'Something went wrong'){
+  return fetch(url).then(response => {
+    if(!response.ok){
+      throw new Error(`${errorMsg} (${response.status})`);
+    }
+    return response.json();
+  });
+}
+
+const getCountryData = function (country){
+  // Country 1
+  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+    .then((data) => {
+     return renderCountry(data[0]);
+    })
+    .catch(err => {
+      renderError(`Something went wrong!! ${err.message}`);
+    }).finally(() =>{
+    countriesContainer.style.opacity = "1"
+  });
+}
+
+// Step #1: Create a function that takes latitude & Longitude
+const whereAmI = function (lat, lng){
+  // Step #2: Use fetch API to figure out where the user is located
+  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+    .then(response => {
+      // Step #5: Throw an error message manually
+      if(!response.ok){
+        throw new Error(`The request for data can only make 3 request per second. Please give it time to load`);
+      }
+     return response.json()
+    })
+    .then(data => {
+      // Step #3: Look through data once we have it and log message to console
+      console.log(`You are in ${data.city}, ${data.country}`);
+      // Step #6 & #7: Send country through country API
+      return getCountryData(data.country.toLowerCase());
+    })
+    // Step #4: Chain a catch to throw errors
+    .catch(err => console.error(`Something went wrong. ${err.message}`))
+}
+
+whereAmI(52.508, 13.381);
+whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
 
 
+/* Professor Code:
+const whereAmI2 = function (lat, lng){
+  // Step #2: Use fetch API to figure out where the user is located
+  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+    .then(response => {
+      // Step #5: Throw an error message manually
+      if(!response.ok){
+        throw new Error(`The request for data can only make 3 request per second. Please give it time to load`);
+      }
+      return response.json()
+    })
+    .then(data => {
+      // Step #3: Look through data once we have it and log message to console
+      console.log(`You are in ${data.city}, ${data.country}`);
+      // Step #6 & #7: Send country through country API
+      return fetch(`https://restcountries.com/v2/name/${data.country}`);
+    })
+    // Step #6
+    .then(res => {
+      if(!res.ok){
+        throw new Error(`Country not found ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => renderCountry(data[0]))
+    // Step #4: Chain a catch to throw errors
+    .catch(err => console.error(`Something went wrong. ${err.message}`))
+}
 
+whereAmI2(52.508, 13.381);
 
-
-
-
+ */
 
 
 
