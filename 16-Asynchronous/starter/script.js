@@ -369,7 +369,6 @@ TEST COORDINATES 2: 19.037, 72.873
 TEST COORDINATES 2: -33.933, 18.474
 
 GOOD LUCK 😀
- */
 
 // Code from lecture
 const renderCountry = function (data, className = ""){
@@ -444,8 +443,7 @@ whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 // whereAmI(-33.933, 18.474);
 
-
-/* Professor Code:
+// Professor Code:
 const whereAmI2 = function (lat, lng){
   // Step #2: Use fetch API to figure out where the user is located
   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
@@ -477,6 +475,23 @@ const whereAmI2 = function (lat, lng){
 whereAmI2(52.508, 13.381);
 
  */
+
+/*
+TODO: Event Loop in Practice
+ */
+console.log('Test Start');
+// Called after 0 seconds
+setTimeout(() => console.log('0 sec timer'), 0);
+// Promise that resolves right away
+Promise.resolve('Resolved Promise 1').then(res => console.log(res));
+
+// Making it take a long time
+Promise.resolve('Resolve Promise 2').then(res => {
+  for (let i=0; i < 1000000000; i++){}
+  console.log(res)
+});
+console.log('Test end');
+
 
 
 
