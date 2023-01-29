@@ -901,11 +901,100 @@ console.log('1: Will get location');
 
  */
 
+/*
+TODO: Running Promises in Parallel
+
+const getJSON = function (url, errorMsg = 'Something went wrong'){
+  return fetch(url).then(res => {
+    if(!res.ok) throw new Error(`${errorMsg} {${res.status}`);
+
+    return res.json();
+  })
+}
+const get3Countries = async function(c1, c2, c3){
+  try {
+    // Destructuring returned data
+    // const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`);
+    // const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`);
+    // const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`);
+    // console.log([data1.captial, data2.captial, data3.captial]);
+
+    const promiseArray = [
+      getJSON(`https://restcountries.com/v2/name/${c1}`),
+      getJSON(`https://restcountries.com/v2/name/${c2}`),
+      getJSON(`https://restcountries.com/v2/name/${c3}`)
+    ];
+    const data = await Promise.all(promiseArray);
+
+    console.log(data.map(d => d[0].capital));
+
+  }catch (e) {
+    console.error(e);
+  }
+}
+
+get3Countries('USA', 'portugal', 'canada');
+
+ */
+
+/*
+TODO: Other Promise Combinators:
+
+const getJSON = function (url, errorMsg = 'Something went wrong'){
+  return fetch(url).then(res => {
+    if(!res.ok) throw new Error(`${errorMsg} {${res.status}`);
+
+    return res.json();
+  })
+}
+
+// // Promise.race:
+// (async function(){
+//   const promiseArray = [
+//     getJSON(`https://restcountries.com/v2/name/italy`),
+//     getJSON(`https://restcountries.com/v2/name/egypt`),
+//     getJSON(`https://restcountries.com/v2/name/mexico`)
+//   ];
+//   const race = await Promise.race(promiseArray);
+//   console.log(race[0]);
+// })();
+
+const timeout = function (sec){
+  return new Promise(function (_, reject){
+    setTimeout(function (){
+      reject(new Error('Request took too long!'));
+    }, sec * 1000)
+  });
+}
+
+Promise.race([
+  getJSON(`https://restcountries.com/v2/name/italy`),
+  timeout(3)
+])
+  .then(res => console.log(res[0]))
+  .catch(err => console.error(err));
+
+// Promise.allSettled
+Promise.allSettled([
+  Promise.resolve('Success'),
+  Promise.resolve('Success 2'),
+  Promise.reject('Error'),
+]).then(res => console.log(res));
+// Will throw an error because one rejects
+// Promise.all([
+//   Promise.resolve('Success'),
+//   Promise.resolve('Success 2'),
+//   Promise.reject('Error'),
+// ]).then(res => console.log(res));
 
 
+Promise.any([
+  Promise.resolve('Success'),
+  Promise.resolve('Success 2'),
+  Promise.reject('Error'),
+]).then(res => console.log(res));
 
-
-
+ */
 
 
 
