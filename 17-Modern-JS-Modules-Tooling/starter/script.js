@@ -110,6 +110,37 @@ import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 
  */
 
+/*
+TODO: Using Parcel
+
+// Will not reload the page
+import cloneDeep from 'lodash-es';
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
