@@ -116,8 +116,26 @@ TODO: Using Parcel
 // Will not reload the page
 import cloneDeep from 'lodash-es';
 
+// Hot check
+if (module.hot){
+  module.hot.accept();
+}
+
  */
 
+class Person {
+  greeting = 'Hey';
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting}, ${this.name}`);
+  }
+}
+
+const landon = new Person('Landon');
+
+// import 'core-js/stable';
+// // Polifilling async functions
+// import 'regenerator-runtime/runtime'
 
 
 
