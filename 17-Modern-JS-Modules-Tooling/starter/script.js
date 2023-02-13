@@ -1,4 +1,4 @@
-import * as ShoppingCart from './shoppingCart.js';
+// import * as ShoppingCart from './shoppingCart.js';
 
 /*
 TODO: Exporting and Importing in ES6 Modules
