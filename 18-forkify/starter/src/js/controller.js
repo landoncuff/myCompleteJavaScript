@@ -18,65 +18,25 @@ const timeout = function (s) {
 // https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
-
 /*
-TODO: Loading a Recipe from API
-
-
-// Creating an async/await function
-const showRecipe = async function(){
-  try{
-    // Fetching data from our first API -- returns a Promise
-    const res = await fetch(
-      // 5ed6604591c37cdc054bc886 are ID's for each food
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcc40'
-    );
-    // Converting our fetch into JSON
-    const data = await res.json();
-
-    // Throw error if status failed -- Will send message to catch block
-    if(!res.ok) throw new Error(`${data.message} (${data.status})`);
-
-    console.log(res, data);
-
-    let {recipe} = data.data; // Using destructuring because both value and variable are same name
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceURL: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients
-    }
-
-    console.log(recipe);
-
-  }catch (e){
-    alert(e);
-  }
-}
-
-showRecipe();
-
- */
-
-/*
-TODO: Rendering the Recipe
+TODO: Listening for load and hashchange events
  */
 
 // Creating an async/await function
 // 1) Loading Recipe
 const showRecipe = async function(){
   try{
+    // Getting recipe id
+    const id = window.location.hash.slice(1);
+    if(!id) return;
+
     // Displaying spinner
     renderSpinner(recipeContainer);
     // Fetching data from our first API -- returns a Promise
     const res = await fetch(
       // 5ed6604591c37cdc054bc886 are ID's for each food
       // 5ed6604591c37cdc054bcc40
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
     // Converting our fetch into JSON
     const data = await res.json();
@@ -212,4 +172,18 @@ const renderSpinner = function (parentEl){
   parentEl.insertAdjacentHTML('afterbegin', markup);
 }
 
-showRecipe();
+// showRecipe();
+
+// 4) Creating an event that will change the hash in the url
+// We are fetching the data when the hash changes
+// window.addEventListener('hashchange', showRecipe);
+
+// 5) Creating an event that will load recipes on load
+// window.addEventListener('load', showRecipe);
+
+// calling both events at once
+const events = ['hashchange', 'load'];
+events.forEach(ev => window.addEventListener(ev, showRecipe));
+
+
+
