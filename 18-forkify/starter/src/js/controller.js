@@ -19,7 +19,7 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 /*
-TODO: Listening for load and hashchange events
+TODO: The MVC Architecture
  */
 
 // Creating an async/await function
