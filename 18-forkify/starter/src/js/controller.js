@@ -44,16 +44,6 @@ const controlRecipe = async function(){
   }
 }
 
-
-// showRecipe();
-
-// 4) Creating an event that will change the hash in the url
-// We are fetching the data when the hash changes
-// window.addEventListener('hashchange', controlRecipe);
-
-// 5) Creating an event that will load recipes on load
-// window.addEventListener('load', controlRecipe);
-
 // calling both events at once
 const events = ['hashchange', 'load'];
 events.forEach(ev => window.addEventListener(ev, controlRecipe));
