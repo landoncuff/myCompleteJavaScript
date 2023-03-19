@@ -1,20 +1,15 @@
+import {API_URL} from './config.js';
+import { async } from 'regenerator-runtime';
+import {getJSON} from "./helpers.js";
+
 export const state = {
   recipe: {},
 }
 
 export const loadRecipe = async function(id){
   try{
-    // Fetching data from our first API -- returns a Promise
-    const res = await fetch(
-      // 5ed6604591c37cdc054bc886 are ID's for each food
-      // 5ed6604591c37cdc054bcc40
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
-    // Converting our fetch into JSON
-    const data = await res.json();
-
-    // Throw error if status failed -- Will send message to catch block
-    if(!res.ok) throw new Error(`${data.message} (${data.status})`);
+    // Fetching data
+    const data = await getJSON(`${API_URL}${id}`);
 
     let {recipe} = data.data; // Using destructuring because both value and variable are same name
     // changing our state object
@@ -29,6 +24,6 @@ export const loadRecipe = async function(id){
       ingredients: recipe.ingredients
     }
   }catch (e){
-    alert(e);
+    console.log(e);
   }
 }
