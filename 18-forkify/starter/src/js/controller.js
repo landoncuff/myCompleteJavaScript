@@ -10,6 +10,7 @@ import 'regenerator-runtime/runtime';
 TODO: Refactoring for MVC:
  */
 
+
 const controlRecipe = async function(){
   try{
     // Getting recipe id
@@ -32,9 +33,9 @@ const controlRecipe = async function(){
   }
 }
 
-// calling both events at once
-const events = ['hashchange', 'load'];
-events.forEach(ev => window.addEventListener(ev, controlRecipe));
 
-
-
+const init = function (){
+  // Calling the events inside the View
+  recipeView.addHandlerRender(controlRecipe);
+}
+init();
