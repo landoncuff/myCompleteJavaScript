@@ -24,6 +24,7 @@ export const loadRecipe = async function(id){
       ingredients: recipe.ingredients
     }
   }catch (e){
-    console.log(e);
+    // Throwing error so we get the actual error in controller
+    throw e;
   }
 }
