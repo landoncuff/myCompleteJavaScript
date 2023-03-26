@@ -1,9 +1,13 @@
 import * as model from './model.js';
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
+import resultsView from "./views/resultsView";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+if(module.hot){
+  module.hot.accept();
+}
 
 const controlRecipe = async function(){
   try{
@@ -30,12 +34,18 @@ const controlRecipe = async function(){
 
 const controlSearchResults = async function(){
   try{
+    // Rendering Spinner for search
+    resultsView.renderSpinner();
+
     // 1) Getting query from the view
     const query = searchView.getQuery();
     if(!query) return;
 
     // 2) Load Search
     await model.loadSearchResults(query);
+
+    // Passes data to the Parent Class which then calls the render in Child Class
+    resultsView.render(model.state.search.results);
 
   }catch (e) {
     console.log(e);

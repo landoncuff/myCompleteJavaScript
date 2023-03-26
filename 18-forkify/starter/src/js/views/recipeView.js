@@ -1,77 +1,15 @@
+import View from "./View.js";
 // Importing our images so parcel can read our images
 // import icons from '../img/icons.svg'; // Parcel 1
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 import {Fraction} from 'fractional'; // Installed through npm
 
-class RecipeView {
+class RecipeView extends View{
   // Private Variables
-  #parentElement = document.querySelector('.recipe');
-  #data;
-  #errorMessage = 'We could not find that recipe. Please try another one!';
-  #message = '';
-
-
-  // Methods
-  render(data) {
-    this.#data = data;
-    const markup = this.#generateMarkup();
-    // Removing markup html that already exists on the webpage
-    this.#clear();
-
-    // Inserting string into the HTML (Parent element)
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  renderSpinner(){
-    const markup = `
-    <div class="spinner">
-      <svg>
-        <use href="${icons}#icon-loader"></use>
-      </svg>
-    </div>
-  `;
-    //clearing parent html element
-    // this.#parentElement.innerHTML = '';
-    this.#clear();
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  renderError(message= this.#errorMessage){
-    // Set default message to be message variable in Class
-    const markup = `
-       <div class="error">
-          <div>
-            <svg>
-              <use href="${icons}#icon-alert-triangle"></use>
-            </svg>
-          </div>
-          <p>${message}</p>
-       </div>
-    `;
-    this.#clear();
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  renderMessage(message= this.#message){
-    // Set default message to be message variable in Class
-    const markup = `
-        <div class="message">
-          <div>
-            <svg>
-              <use href="${icons}#icon-smile"></use>
-            </svg>
-          </div>
-          <p>${message}</p>
-        </div>
-    `;
-    this.#clear();
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  // Private Methods
-  #clear(){
-    this.#parentElement.innerHTML = '';
-  }
+  _parentElement = document.querySelector('.recipe');
+  _data;
+  _errorMessage = 'We could not find that recipe. Please try another one!';
+  _message = '';
 
   addHandlerRender(handlerFunction){
     // calling both events at once
@@ -79,12 +17,12 @@ class RecipeView {
     events.forEach(ev => window.addEventListener(ev, handlerFunction));
   }
 
-  #generateMarkup(){
+  _generateMarkup(){
     return `
         <figure class="recipe__fig">
-          <img src="${this.#data.image}" alt="${this.#data.title}" class="recipe__img" />
+          <img src="${this._data.image}" alt="${this._data.title}" class="recipe__img" />
           <h1 class="recipe__title">
-            <span>${this.#data.title}</span>
+            <span>${this._data.title}</span>
           </h1>
         </figure>
 
@@ -93,14 +31,14 @@ class RecipeView {
             <svg class="recipe__info-icon">
               <use href="${icons}#icon-clock"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--minutes">${this.#data.cookingTime}</span>
+            <span class="recipe__info-data recipe__info-data--minutes">${this._data.cookingTime}</span>
             <span class="recipe__info-text">minutes</span>
           </div>
           <div class="recipe__info">
             <svg class="recipe__info-icon">
               <use href="${icons}#icon-users"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--people">${this.#data.servings}</span>
+            <span class="recipe__info-data recipe__info-data--people">${this._data.servings}</span>
             <span class="recipe__info-text">Servings</span>
 
             <div class="recipe__info-buttons">
@@ -118,9 +56,7 @@ class RecipeView {
           </div>
 
           <div class="recipe__user-generated">
-            <svg>
-              <use href="${icons}#icon-user"></use>
-            </svg>
+            
           </div>
           <button class="btn--round">
             <svg class="">
@@ -133,7 +69,7 @@ class RecipeView {
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
             <!-- Mapping through each ingredient and combinding into one string -->
-            ${this.#data.ingredients.map(this.#generateMarkupIngredient).join('')}
+            ${this._data.ingredients.map(this._generateMarkupIngredient).join('')}
           </ul>
         </div>
 
@@ -141,12 +77,12 @@ class RecipeView {
           <h2 class="heading--2">How to cook it</h2>
           <p class="recipe__directions-text">
             This recipe was carefully designed and tested by
-            <span class="recipe__publisher">${this.#data.publisher}</span>. Please check out
+            <span class="recipe__publisher">${this._data.publisher}</span>. Please check out
             directions at their website.
           </p>
           <a
             class="btn--small recipe__btn"
-            href="${this.#data.sourceURL}"
+            href="${this._data.sourceURL}"
             target="_blank"
           >
             <span>Directions</span>
@@ -158,7 +94,7 @@ class RecipeView {
     `;
   }
 
-  #generateMarkupIngredient(ing){
+  _generateMarkupIngredient(ing){
       return `
           <li class="recipe__ingredient">
             <svg class="recipe__icon">
