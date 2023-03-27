@@ -45,7 +45,9 @@ const controlSearchResults = async function(){
     await model.loadSearchResults(query);
 
     // Passes data to the Parent Class which then calls the render in Child Class
-    resultsView.render(model.state.search.results);
+    // Getting 10 results at a time
+    resultsView.render(model.getSearchResultsPage(1));
+    // resultsView.render(model.state.search.results);
 
   }catch (e) {
     console.log(e);
