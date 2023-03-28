@@ -2,6 +2,7 @@ import * as model from './model.js';
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView";
+import paginationView from "./views/paginationView.js";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -44,10 +45,15 @@ const controlSearchResults = async function(){
     // 2) Load Search
     await model.loadSearchResults(query);
 
+    // 3) Render data
     // Passes data to the Parent Class which then calls the render in Child Class
     // Getting 10 results at a time
     resultsView.render(model.getSearchResultsPage(1));
     // resultsView.render(model.state.search.results);
+
+    // 4) Displaying pagination buttons
+    paginationView.render(model.state.search);
+
 
   }catch (e) {
     console.log(e);
