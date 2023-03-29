@@ -45,13 +45,13 @@ const controlSearchResults = async function(){
     // 2) Load Search
     await model.loadSearchResults(query);
 
-    // 3) Render data
+    // 3) Render initial data
     // Passes data to the Parent Class which then calls the render in Child Class
     // Getting 10 results at a time
     resultsView.render(model.getSearchResultsPage(1));
     // resultsView.render(model.state.search.results);
 
-    // 4) Displaying pagination buttons
+    // 4) Displaying initial pagination buttons
     paginationView.render(model.state.search);
 
 
@@ -60,9 +60,19 @@ const controlSearchResults = async function(){
   }
 }
 
+// Handles the control of Pagination Buttons
+const controlPagination = function (goToPage){
+  // 1) Render NEW results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // 2) Render NEW pagination buttons
+  paginationView.render(model.state.search);
+}
+
 const init = function (){
   // Calling the events inside the View
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 }
 init();
