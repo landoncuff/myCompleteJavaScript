@@ -6,6 +6,8 @@ import paginationView from "./views/paginationView.js";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+// NO CODE.. VIDEO WORK
+
 if(module.hot){
   module.hot.accept();
 }
