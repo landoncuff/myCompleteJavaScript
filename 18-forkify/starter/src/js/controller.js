@@ -6,8 +6,6 @@ import paginationView from "./views/paginationView.js";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// NO CODE.. VIDEO WORK
-
 if(module.hot){
   module.hot.accept();
 }
@@ -28,7 +26,6 @@ const controlRecipe = async function(){
     // 2) Rendering Recipe: calling class method
     recipeView.render(recipe);
     // recipeView.render(model.state.recipe);
-
   }catch (e){
     // Displaying and Handling error message in View
     recipeView.renderError();
@@ -71,9 +68,18 @@ const controlPagination = function (goToPage){
   paginationView.render(model.state.search);
 }
 
+const controlServings = function (newServings){
+  // Update the recipe servings (in State)
+  model.updateServings(newServings);
+
+  // Update the recipe View
+  recipeView.render(model.state.recipe);
+}
+
 const init = function (){
   // Calling the events inside the View
   recipeView.addHandlerRender(controlRecipe);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 }
