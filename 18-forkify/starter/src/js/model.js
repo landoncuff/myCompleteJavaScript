@@ -8,7 +8,8 @@ export const state = {
     results: [],
     resultsPerPage: RES_PER_PAGE,
     page: 1,
-  }
+  },
+  bookmark: [],
 }
 
 export const loadRecipe = async function(id){
@@ -27,6 +28,13 @@ export const loadRecipe = async function(id){
       servings: recipe.servings,
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients
+    }
+
+    // checking to see if new API call is marked as a bookmark
+    if(state.bookmark.some(bookmark => bookmark.id === id)){
+      state.recipe.bookmarked = true;
+    }else{
+      state.recipe.bookmarked = false;
     }
   }catch (e){
     // Throwing error so we get the actual error in controller
@@ -52,6 +60,7 @@ export const loadSearchResults = async function(query){ // Called by the control
         image: rec.image_url,
       }
     });
+    state.search.page = 1;
   }catch (e) {
     // Throwing error so we get the actual error in controller
     throw e;
@@ -74,4 +83,21 @@ export const updateServings = function (newServings){
   });
 
   state.recipe.servings = newServings;
+}
+
+export const addBookmark = function (recipe){
+  // Add bookmark
+  state.bookmark.push(recipe);
+
+  // Mark current recipe as bookmark
+  if(recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+}
+
+export const deleteBookmark = function (id){
+  // Delete Bookmark
+  const index = state.bookmark.findIndex(el => el.id === id);
+  state.bookmark.splice(index, 1);
+
+  // Mark current recipe as NOT bookmark
+  if(id === state.recipe.id) state.recipe.bookmarked = false;
 }

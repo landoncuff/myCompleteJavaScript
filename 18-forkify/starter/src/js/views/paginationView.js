@@ -5,7 +5,7 @@ class PaginationView extends View {
   _parentElement = document.querySelector('.pagination');
 
   addHandlerClick(handler){
-    // Event delcation
+    // Event declaration
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--inline');
       if(!btn) return;
