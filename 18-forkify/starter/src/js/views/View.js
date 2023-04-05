@@ -3,13 +3,17 @@ import icons from 'url:../../img/icons.svg'; // Parcel 2
 export default class View {
   _data;
   // Methods
-  render(data) {
+  render(data, render = true) {
     if(!data || (Array.isArray(data) && data.length === 0)){
       return this.renderError();
     }
 
     this._data = data;
     const markup = this._generateMarkup();
+
+    // returning markup if we don't want to display new results
+    if(!render) return markup;
+
     // Removing markup html that already exists on the webpage
     this._clear();
 
@@ -18,7 +22,6 @@ export default class View {
   }
 
   update(data){
-
     this._data = data;
     const newMarkup = this._generateMarkup();
 
