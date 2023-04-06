@@ -7,6 +7,8 @@ import bookmarksView from "./views/bookmarksView.js";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+// Video work
+
 if(module.hot){
   module.hot.accept();
 }
