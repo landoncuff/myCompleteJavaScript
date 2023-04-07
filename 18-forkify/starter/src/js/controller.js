@@ -7,8 +7,6 @@ import bookmarksView from "./views/bookmarksView.js";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// Video work
-
 if(module.hot){
   module.hot.accept();
 }
@@ -98,8 +96,13 @@ const controlAddBookmark = function (){
   bookmarksView.render(model.state.bookmark)
 }
 
+const controlBookmarks = function (){
+  bookmarksView.render(model.state.bookmark);
+}
+
 const init = function (){
   // Calling the events inside the View
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipe);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
