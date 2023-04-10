@@ -7,6 +7,7 @@ import bookmarksView from "./views/bookmarksView.js";
 import addRecipeView from "./views/addRecipeView.js";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import {uploadRecipe} from "./model.js";
 
 if(module.hot){
   module.hot.accept();
@@ -101,8 +102,12 @@ const controlBookmarks = function (){
   bookmarksView.render(model.state.bookmark);
 }
 
-const controlAddRecipe = function (newRecipe){
-  console.log(newRecipe);
+const controlAddRecipe = async function (newRecipe){
+  try{
+    await model.uploadRecipe(newRecipe);
+  }catch (e){
+    addRecipeView.renderError(e);
+  }
 }
 
 const init = function (){
