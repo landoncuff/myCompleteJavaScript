@@ -1,5 +1,5 @@
-import {API_URL, RES_PER_PAGE} from './config.js';
-import {getJSON} from "./helpers.js";
+import {API_URL, KEY, RES_PER_PAGE} from './config.js';
+import {getJSON, sendJSON} from "./helpers.js";
 
 export const state = {
   recipe: {},
@@ -12,23 +12,29 @@ export const state = {
   bookmark: [],
 }
 
+const createRecipeObject = function(data){
+  let {recipe} = data.data; // Using destructuring because both value and variable are same name
+  // changing our state object
+  return  {
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceURL: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients,
+    // && will short circuit
+    ...(recipe.key && {key: recipe.key})
+  }
+}
+
 export const loadRecipe = async function(id){
   try{
     // Fetching data
     const data = await getJSON(`${API_URL}${id}`);
 
-    let {recipe} = data.data; // Using destructuring because both value and variable are same name
-    // changing our state object
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceURL: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients
-    }
+    state.recipe = createRecipeObject(data);
 
     // checking to see if new API call is marked as a bookmark
     if(state.bookmark.some(bookmark => bookmark.id === id)){
@@ -133,8 +139,23 @@ export const uploadRecipe = async function(newRecipe){
         const [quantity, unit, description] = ingArr;
         return {quantity: quantity ? +quantity : null, unit, description};
       });
+
+    const recipe = {
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      publisher: newRecipe.publisher,
+      cooking_time: +newRecipe.cookingTime,
+      servings: +newRecipe.servings,
+      ingredients,
+    }
+
+    // Calling function from helpers.js
+    const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
+    state.recipe = createRecipeObject(data);
+    addBookmark(state.recipe);
+
   }catch (e){
     throw e;
   }
-  console.log(ingredients);
 }
