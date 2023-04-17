@@ -10,6 +10,8 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import {uploadRecipe} from "./model.js";
 
+// Video Work
+
 if(module.hot){
   module.hot.accept();
 }
