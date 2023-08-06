@@ -1,4 +1,4 @@
-// Did Challenge Again
+// Went through each challenge a second time
 
 //! Challenge 1:
 
